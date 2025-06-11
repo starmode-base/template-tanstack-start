@@ -1,0 +1,7 @@
+# TanStack Start
+.DS_Store
+/.env
+/.nitro/
+/.output/
+/.tanstack/
+/node_modules/
