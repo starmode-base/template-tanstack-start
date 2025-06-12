@@ -37,8 +37,8 @@ function Home() {
       <button
         type="button"
         onClick={() => {
-          updateCount({ data: 1 }).then(() => {
-            router.invalidate();
+          void updateCount({ data: 1 }).then(() => {
+            void router.invalidate();
           });
         }}
         className="m-auto rounded bg-amber-700 px-2 py-1 text-white"
