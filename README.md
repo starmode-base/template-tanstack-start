@@ -1,4 +1,4 @@
-# Template TanStack Start
+# TanStack Start Template by STΛR MODΞ
 
 To install dependencies:
 

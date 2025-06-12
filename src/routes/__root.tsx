@@ -1,5 +1,4 @@
 /// <reference types="vite/client" />
-import type { ReactNode } from "react";
 import {
   Outlet,
   createRootRoute,
@@ -32,7 +31,7 @@ function RootComponent() {
   );
 }
 
-function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+function RootDocument({ children }: React.PropsWithChildren) {
   return (
     <html>
       <head>
