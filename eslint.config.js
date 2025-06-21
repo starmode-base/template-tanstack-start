@@ -7,8 +7,16 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
+import pluginRouter from "@tanstack/eslint-plugin-router";
 
 export default defineConfig([
+  /**
+   * Ignore files
+   */
+  {
+    ignores: [".nitro/*", ".output/*", ".tanstack/*"],
+  },
+
   /**
    * https://eslint.org/docs/latest/rules
    */
@@ -50,6 +58,9 @@ export default defineConfig([
    */
   pluginReact.configs.flat["jsx-runtime"],
 
+  /**
+   * https://eslint.org/docs/latest/rules/
+   */
   {
     rules: {
       /** https://eslint.org/docs/latest/rules/eqeqeq */
@@ -65,6 +76,9 @@ export default defineConfig([
     },
   },
 
+  /**
+   * https://typescript-eslint.io/rules/
+   */
   {
     rules: {
       /** https://typescript-eslint.io/rules/no-misused-promises/ */
@@ -92,6 +106,11 @@ export default defineConfig([
           allowRegExp: false,
         },
       ],
+      /** https://typescript-eslint.io/rules/only-throw-error/ */
+      "@typescript-eslint/only-throw-error": [
+        "error",
+        { allow: ["NotFoundError"] },
+      ],
     },
   },
 
@@ -105,4 +124,9 @@ export default defineConfig([
       "react/self-closing-comp": "error",
     },
   },
+
+  /**
+   * https://tanstack.com/router/latest/docs/eslint/eslint-plugin-router
+   */
+  ...pluginRouter.configs["flat/recommended"],
 ]);

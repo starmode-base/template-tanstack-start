@@ -18,7 +18,10 @@ export const Route = createRootRoute({
       { name: "og:title", content: metadata.name },
       { name: "og:description", content: metadata.description },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/icon.svg?j4n8p2mx" },
+    ],
   }),
   component: RootComponent,
 });

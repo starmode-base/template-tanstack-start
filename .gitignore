@@ -1,7 +1,14 @@
-# TanStack Start
-.DS_Store
-/.env
+# Dependencies
+/node_modules/
+
+# Build
 /.nitro/
 /.output/
 /.tanstack/
-/node_modules/
+
+# Environment
+/.env
+/.vercel/
+
+# Misc
+.DS_Store
