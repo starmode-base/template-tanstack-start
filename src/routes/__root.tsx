@@ -17,10 +17,11 @@ export const Route = createRootRoute({
       { name: "description", content: metadata.description },
       { name: "og:title", content: metadata.name },
       { name: "og:description", content: metadata.description },
+      { name: "og:image", content: metadata.shareCardImage },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/icon.svg?j4n8p2mx" },
+      { rel: "icon", href: `${metadata.browserIcon}?x7k9m2p4` },
     ],
   }),
   component: RootComponent,
