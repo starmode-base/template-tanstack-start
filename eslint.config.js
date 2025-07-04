@@ -8,6 +8,7 @@ import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
 import pluginRouter from "@tanstack/eslint-plugin-router";
+import reactHooks from "eslint-plugin-react-hooks";
 
 export default defineConfig([
   /**
@@ -129,6 +130,13 @@ export default defineConfig([
       "react/self-closing-comp": "error",
     },
   },
+  /**
+   * React Hooks
+   *
+   * https://www.npmjs.com/package/eslint-plugin-react-hooks
+   * https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
+   */
+  reactHooks.configs["recommended-latest"],
 
   /**
    * TanStack Router
