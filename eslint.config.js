@@ -18,50 +18,14 @@ export default defineConfig([
   },
 
   /**
+   * ESLint
+   *
    * https://eslint.org/docs/latest/rules
    */
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js: eslint },
     extends: ["js/recommended"],
-  },
-
-  /**
-   * https://typescript-eslint.io/getting-started/typed-linting/
-   */
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
-  },
-
-  /**
-   * https://typescript-eslint.io/users/configs#strict-type-checked
-   * https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/eslintrc/strict-type-checked.ts
-   */
-  tseslint.configs.strictTypeChecked,
-
-  /**
-   * https://typescript-eslint.io/users/configs#stylistic-type-checked
-   * https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/eslintrc/stylistic-type-checked.ts
-   */
-  tseslint.configs.stylisticTypeChecked,
-
-  /**
-   * https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#flat-configs
-   * https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
-   */
-  pluginReact.configs.flat["jsx-runtime"],
-
-  /**
-   * https://eslint.org/docs/latest/rules/
-   */
-  {
     rules: {
       /** https://eslint.org/docs/latest/rules/eqeqeq */
       eqeqeq: "error",
@@ -77,6 +41,40 @@ export default defineConfig([
   },
 
   /**
+   * TypeScript
+   *
+   * https://typescript-eslint.io/getting-started/typed-linting/
+   */
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+
+  /**
+   * TypeScript
+   *
+   * https://typescript-eslint.io/users/configs#strict-type-checked
+   * https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/eslintrc/strict-type-checked.ts
+   */
+  tseslint.configs.strictTypeChecked,
+
+  /**
+   * TypeScript
+   *
+   * https://typescript-eslint.io/users/configs#stylistic-type-checked
+   * https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/configs/eslintrc/stylistic-type-checked.ts
+   */
+  tseslint.configs.stylisticTypeChecked,
+
+  /**
+   * TypeScript
+   *
    * https://typescript-eslint.io/rules/
    */
   {
@@ -114,6 +112,13 @@ export default defineConfig([
     },
   },
 
+  /**
+   * React
+   *
+   * https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#flat-configs
+   * https://github.com/jsx-eslint/eslint-plugin-react?tab=readme-ov-file#list-of-supported-rules
+   */
+  pluginReact.configs.flat["jsx-runtime"],
   {
     rules: {
       /** https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-no-leaked-render.md */
@@ -126,6 +131,8 @@ export default defineConfig([
   },
 
   /**
+   * TanStack Router
+   *
    * https://tanstack.com/router/latest/docs/eslint/eslint-plugin-router
    */
   ...pluginRouter.configs["flat/recommended"],
