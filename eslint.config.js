@@ -1,6 +1,9 @@
 /**
  * https://eslint.org/
  * https://typescript-eslint.io/
+ * https://www.npmjs.com/package/eslint-plugin-react
+ * https://www.npmjs.com/package/eslint-plugin-react-hooks
+ * https://tanstack.com/router/latest/docs/eslint/eslint-plugin-router
  */
 import eslint from "@eslint/js";
 import globals from "globals";
