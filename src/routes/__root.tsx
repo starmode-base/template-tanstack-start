@@ -5,8 +5,10 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "~/styles/app.css?url";
 import metadata from "../../metadata.json";
+import { inject } from "@vercel/analytics";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -36,6 +38,9 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: React.PropsWithChildren) {
+  // https://vercel.com/docs/analytics/quickstart
+  inject();
+
   return (
     <html>
       <head>
@@ -43,6 +48,7 @@ function RootDocument({ children }: React.PropsWithChildren) {
       </head>
       <body>
         {children}
+        <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
     </html>
