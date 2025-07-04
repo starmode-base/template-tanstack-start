@@ -56,7 +56,7 @@ type VercelEnv = (typeof vercelEnvs)[number];
  * This function normalizes the environment variables to be the same across all
  * of these contexts.
  */
-export function createEnsureEnv<const T extends readonly string[]>(appEnvs: T) {
+function createEnsureEnv<const T extends readonly string[]>(appEnvs: T) {
   type AppEnv = T[number];
   type AnyEnv = VercelEnv | AppEnv;
 
