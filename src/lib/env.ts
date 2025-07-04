@@ -40,6 +40,21 @@ function isVercelEnv(name: string): name is VercelEnv {
   return (vercelEnvs as readonly string[]).includes(name);
 }
 
+/**
+ * Helper to safely get import.meta.env values
+ *
+ * import.meta is not available in CommonJS context. Wrapping in a try/catch
+ * allows us to safely get the value of the environment variable.
+ */
+function getImportMetaEnv(name: string): unknown {
+  try {
+    return import.meta.env[name];
+  } catch {
+    // Ignore if import.meta is not available (CommonJS context)
+    return undefined;
+  }
+}
+
 type VercelEnv = (typeof vercelEnvs)[number];
 
 /**
@@ -67,12 +82,12 @@ function createEnsureEnv<const T extends readonly string[]>(appEnvs: T) {
       throw new Error(`"${name}" isn’t in the declared env list`);
     }
 
-    const candidates: unknown[] = [process.env[name], import.meta.env[name]];
+    const candidates: unknown[] = [process.env[name], getImportMetaEnv(name)];
 
     // Add VITE_ fallback for Vercel vars
     if (isVercelEnv(name)) {
       candidates.push(process.env[`VITE_${name}`]);
-      candidates.push(import.meta.env[`VITE_${name}`]);
+      candidates.push(getImportMetaEnv(`VITE_${name}`));
     }
 
     const env = candidates.find((e) => typeof e === "string");
@@ -85,7 +100,4 @@ function createEnsureEnv<const T extends readonly string[]>(appEnvs: T) {
   };
 }
 
-export const ensureEnv = createEnsureEnv([
-  "VITE_STORYBLOK_DELIVERY_API_TOKEN",
-  "APP_PASSWORD",
-]);
+export const ensureEnv = createEnsureEnv(["SOME_ENV", "ANOTHER_ENV"]);
