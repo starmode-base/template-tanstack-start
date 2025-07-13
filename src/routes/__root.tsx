@@ -1,10 +1,5 @@
 /// <reference types="vite/client" />
-import {
-  Outlet,
-  createRootRoute,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
+import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "~/styles/app.css?url";
 import metadata from "../../metadata.json";
@@ -26,16 +21,8 @@ export const Route = createRootRoute({
       { rel: "icon", href: `${metadata.browserIcon}?x7k9m2p4` },
     ],
   }),
-  component: RootComponent,
+  shellComponent: RootDocument,
 });
-
-function RootComponent() {
-  return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
-  );
-}
 
 function RootDocument({ children }: React.PropsWithChildren) {
   // https://vercel.com/docs/analytics/quickstart
