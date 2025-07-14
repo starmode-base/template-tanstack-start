@@ -24,7 +24,7 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 });
 
-function RootDocument({ children }: React.PropsWithChildren) {
+function RootDocument(props: React.PropsWithChildren) {
   // https://vercel.com/docs/analytics/quickstart
   inject();
 
@@ -34,7 +34,7 @@ function RootDocument({ children }: React.PropsWithChildren) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        {props.children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </body>
