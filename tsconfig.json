@@ -18,6 +18,8 @@
       "~/*": ["./src/*"]
     },
     "noEmit": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "types": ["vite/client"]
   }
 }
