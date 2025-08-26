@@ -35,31 +35,19 @@ const idField = () =>
     .primaryKey()
     .default(sql`gen_secure_token()`);
 
-/**
- * Created at
- */
+/** Created at */
 const createdAtField = () =>
   timestamp({ mode: "string" }).defaultNow().notNull();
 
-/**
- * Updated at
- *
- * NOTE: Fields called `updated_at` in any tables are automatically updated to
- * the current timestamp when the row is modified. See
- * src/postgres/migrations/0007_ensure_touch_updated_at.sql
- */
+/** Updated at */
 const updatedAtField = () =>
   timestamp({ mode: "string" }).defaultNow().notNull();
 
-/**
- * Decimal type with 2 decimal places
- */
+/** Decimal type with 2 decimal places */
 export const decimal2 = () =>
   numeric({ scale: 2, precision: 18, mode: "number" });
 
-/**
- * Base schema for most tables
- */
+/** Base schema for most tables */
 const baseSchema = {
   id: idField(),
   createdAt: createdAtField(),
