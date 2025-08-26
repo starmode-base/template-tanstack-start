@@ -8,7 +8,7 @@
 
 # Environment
 /.env
-/.vercel/
+.vercel
 
 # Misc
 .DS_Store
