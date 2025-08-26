@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
 import {
   SignedIn,
   SignedOut,
@@ -8,29 +7,22 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/tanstack-react-start";
-import { authStateMiddleware } from "~/middleware/auth-middleware";
-
-const authStateFn = createServerFn({ method: "GET" })
-  .middleware([authStateMiddleware])
-  .handler(({ context }) => {
-    console.log("context", context);
-
-    return context.viewer?.id;
-  });
 
 export const Route = createFileRoute("/")({
   component: Home,
-  loader: async () => await authStateFn(),
+  loader: ({ context }) => {
+    return context.viewer;
+  },
 });
 
 function Home() {
-  const userId = Route.useLoaderData();
+  const viewer = Route.useLoaderData();
 
   return (
     <main className="flex h-dvh flex-col">
       <SignedIn>
         <div className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white p-4">
-          <div>You are signed in as: {userId}</div>
+          <div>You are signed in as: {viewer?.email}</div>
           <div className="flex items-center gap-2">
             <UserButton />
             <SignOutButton>

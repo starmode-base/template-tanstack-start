@@ -13,9 +13,9 @@ import { db, schema } from "~/postgres/db";
  * Fetch the clerk user id from the Clerk API
  */
 async function fetchClerkUserId(request: Request) {
-  const { userId: clerkUserId } = await getAuth(request);
+  const session = await getAuth(request);
 
-  return clerkUserId;
+  return session.userId;
 }
 
 /**
@@ -31,7 +31,7 @@ async function fetchClerkUser(clerkUserId: string) {
 /**
  * Get the primary email address from a clerk user
  */
-function getClerkPrimaryEmailAddress(clerkUser: ClerkUser) {
+function requireClerkPrimaryEmailAddress(clerkUser: ClerkUser) {
   const email = clerkUser.primaryEmailAddress?.emailAddress;
 
   // Users always have an email address since we're using the email address to
@@ -44,25 +44,25 @@ function getClerkPrimaryEmailAddress(clerkUser: ClerkUser) {
 /**
  * Upsert viewer - syncs the clerk user to our database
  */
-async function upsertViewer(clerkUserId: string) {
+async function upsertViewerRecord(clerkUserId: string) {
   const [viewer] = await db()
     .insert(schema.users)
-    .values({
-      clerkUserId,
-      email: "PENDING",
-    })
+    .values({ clerkUserId, email: "PENDING" })
     .onConflictDoUpdate({
       target: [schema.users.clerkUserId],
       set: { updatedAt: sql`now()` },
     })
     .returning();
 
-  return viewer;
+  return viewer ?? null;
 }
 
+/**
+ * Update the viewer email address in the database from the Clerk API
+ */
 async function refreshViewerEmail(clerkUserId: string) {
   const clerkUser = await fetchClerkUser(clerkUserId);
-  const email = getClerkPrimaryEmailAddress(clerkUser);
+  const email = requireClerkPrimaryEmailAddress(clerkUser);
 
   await db()
     .insert(schema.users)
@@ -74,16 +74,16 @@ async function refreshViewerEmail(clerkUserId: string) {
 }
 
 /**
- * Sync the viewer with the database
+ * Sync the Clerk user with the database
  */
 async function syncViewer() {
-  // Get the clerk user id
+  // Get the current clerk user id
   const clerkUserId = await fetchClerkUserId(getWebRequest());
 
   if (!clerkUserId) return null;
 
   // Upsert the viewer in the foreground
-  const viewer = await upsertViewer(clerkUserId);
+  const viewer = await upsertViewerRecord(clerkUserId);
 
   // Refresh the viewer email in the background
   void refreshViewerEmail(clerkUserId);

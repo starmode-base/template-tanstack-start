@@ -4,8 +4,17 @@ import appCss from "~/styles/app.css?url";
 import metadata from "../../metadata.json";
 import { inject } from "@vercel/analytics";
 import { ClerkProvider } from "@clerk/tanstack-react-start";
+import { createServerFn } from "@tanstack/react-start";
+import { authStateMiddleware } from "~/middleware/auth-middleware";
+
+const authStateFn = createServerFn({ method: "GET" })
+  .middleware([authStateMiddleware])
+  .handler(({ context }) => context.viewer);
 
 export const Route = createRootRoute({
+  beforeLoad: async () => ({
+    viewer: await authStateFn(),
+  }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
