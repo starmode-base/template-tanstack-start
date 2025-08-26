@@ -26,11 +26,7 @@ async function fetchClerkUserId(request: Request) {
  * we need to get the user's email address.
  */
 async function fetchClerkUser(clerkUserId: string) {
-  const clerkUser = clerkUserId
-    ? await clerkClient().users.getUser(clerkUserId)
-    : null;
-
-  return clerkUser;
+  return clerkClient().users.getUser(clerkUserId);
 }
 
 /**
@@ -69,8 +65,6 @@ async function upsertViewer(clerkUserId: string) {
 
 async function refreshViewerEmail(clerkUserId: string) {
   const clerkUser = await fetchClerkUser(clerkUserId);
-  if (!clerkUser) return null;
-
   const email = getClerkPrimaryEmailAddress(clerkUser);
 
   await db()
