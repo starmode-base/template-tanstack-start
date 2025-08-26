@@ -1,0 +1,9 @@
+{
+  "name": "TanStack Start Template by STΛR MODΞ",
+  "description": "TanStack Start Template by STΛR MODΞ",
+  "browserIcon": "/icon.svg",
+  "shareCardImage": "/open-graph.png",
+  "dev": {
+    "port": 3000
+  }
+}
