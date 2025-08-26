@@ -8,14 +8,15 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/tanstack-react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
-import { getAuth } from "@clerk/tanstack-react-start/server";
+import { ensureViewerMiddleware } from "~/middleware/auth-middleware";
 
-const authStateFn = createServerFn({ method: "GET" }).handler(async () => {
-  const { userId } = await getAuth(getWebRequest());
+const authStateFn = createServerFn({ method: "GET" })
+  .middleware([ensureViewerMiddleware])
+  .handler(({ context }) => {
+    console.log("context", context);
 
-  return userId;
-});
+    return context.viewer.id;
+  });
 
 export const Route = createFileRoute("/")({
   component: Home,
