@@ -3,6 +3,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import appCss from "~/styles/app.css?url";
 import metadata from "../../metadata.json";
 import { inject } from "@vercel/analytics";
+import { ClerkProvider } from "@clerk/tanstack-react-start";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -28,15 +29,17 @@ function RootDocument(props: React.PropsWithChildren) {
   inject();
 
   return (
-    <html>
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {props.children}
-        <TanStackRouterDevtools position="bottom-right" />
-        <Scripts />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html>
+        <head>
+          <HeadContent />
+        </head>
+        <body>
+          {props.children}
+          <TanStackRouterDevtools position="bottom-right" />
+          <Scripts />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,50 +1,62 @@
-import * as fs from "node:fs";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/tanstack-react-start";
+import { getWebRequest } from "@tanstack/react-start/server";
+import { getAuth } from "@clerk/tanstack-react-start/server";
 
-const filePath = "count.txt";
+const authStateFn = createServerFn({ method: "GET" }).handler(async () => {
+  const { userId } = await getAuth(getWebRequest());
 
-async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
-  );
-}
-
-const getCount = createServerFn({
-  method: "GET",
-}).handler(() => {
-  return readCount();
+  return userId;
 });
-
-const updateCount = createServerFn({ method: "POST" })
-  .validator((d: number) => d)
-  .handler(async ({ data }) => {
-    const count = await readCount();
-    await fs.promises.writeFile(filePath, `${count + data}`);
-  });
 
 export const Route = createFileRoute("/")({
   component: Home,
-  loader: async () => await getCount(),
+  loader: async () => await authStateFn(),
 });
 
 function Home() {
-  const router = useRouter();
-  const state = Route.useLoaderData();
+  const userId = Route.useLoaderData();
 
   return (
     <main className="flex h-dvh flex-col">
-      <button
-        type="button"
-        onClick={() => {
-          void updateCount({ data: 1 }).then(() => {
-            void router.invalidate();
-          });
-        }}
-        className="m-auto rounded bg-amber-700 px-2 py-1 text-white"
-      >
-        Add 1 to {state}?
-      </button>
+      <SignedIn>
+        <div className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white p-4">
+          <div>You are signed in as: {userId}</div>
+          <div className="flex items-center gap-2">
+            <UserButton />
+            <SignOutButton>
+              <button className="h-fit rounded bg-sky-500 px-4 py-1 text-white">
+                Sign out
+              </button>
+            </SignOutButton>
+          </div>
+        </div>
+      </SignedIn>
+      <SignedOut>
+        <div className="m-auto flex flex-col gap-4 rounded bg-white p-4 shadow">
+          <div className="text-center">You are signed out</div>
+          <div className="flex gap-2">
+            <SignInButton mode="modal">
+              <button className="rounded bg-sky-500 px-4 py-1 text-white">
+                Sign in
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="rounded bg-sky-500 px-4 py-1 text-white">
+                Sign up
+              </button>
+            </SignUpButton>
+          </div>
+        </div>
+      </SignedOut>
     </main>
   );
 }

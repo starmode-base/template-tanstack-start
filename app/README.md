@@ -33,6 +33,7 @@ bun install
 
 ## Ops
 
+- [Clerk](https://clerk.com/)
 - [GitHub](https://github.com/)
 - [Neon](https://console.neon.tech/)
 - [Vercel](https://vercel.com/)
@@ -42,6 +43,12 @@ Neon
 - https://vercel.com/marketplace/neon
 - https://neon.com/docs/guides/neon-managed-vercel-integration
 - NOT: https://neon.com/docs/guides/vercel-managed-integration
+
+Clerk
+
+- https://dashboard.clerk.com/apps/new
+- Copy Clerk env vars and add them to https://vercel.com/starmode/template-tanstack-start-app/settings/environment-variables
+- env:pull
 
 ## Configured tools
 
