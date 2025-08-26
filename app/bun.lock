@@ -28,7 +28,7 @@
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^5.2.0",
         "globals": "^16.3.0",
-        "neon-testing": "^1.1.1",
+        "neon-testing": "^2.0.0",
         "prettier": "^3.6.2",
         "prettier-plugin-tailwindcss": "^0.6.14",
         "typescript": "^5.9.2",
@@ -1280,7 +1280,7 @@
 
     "natural-compare": ["natural-compare@1.4.0", "", {}, "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="],
 
-    "neon-testing": ["neon-testing@1.1.1", "", { "dependencies": { "@neondatabase/api-client": "^2.2.0" }, "peerDependencies": { "vitest": "^3.2.4" } }, "sha512-ZaVs5cfVhgN/Lni5/eNP+rNuzU5L8cHjGWoQB4TkYq9CtLyTmC1danScf4IhfwqYFkOauHwG1q8J3aOEvduakw=="],
+    "neon-testing": ["neon-testing@2.0.0", "", { "dependencies": { "@neondatabase/api-client": "^2.2.0" }, "peerDependencies": { "vitest": "^3" } }, "sha512-fookmwBlEQ4UC/qUyOVwpTibEJy5xRfJT5aEDMauQUvbvZ3G9eSLx7U9Y1j06VCyM0impDVgK90c2jKX4wOIBg=="],
 
     "netlify": ["netlify@13.3.5", "", { "dependencies": { "@netlify/open-api": "^2.37.0", "lodash-es": "^4.17.21", "micro-api-client": "^3.3.0", "node-fetch": "^3.0.0", "p-wait-for": "^5.0.0", "qs": "^6.9.6" } }, "sha512-Nc3loyVASW59W+8fLDZT1lncpG7llffyZ2o0UQLx/Fr20i7P8oP+lE7+TEcFvXj9IUWU6LjB9P3BH+iFGyp+mg=="],
 
