@@ -100,4 +100,4 @@ function createEnsureEnv<const T extends readonly string[]>(appEnvs: T) {
   };
 }
 
-export const ensureEnv = createEnsureEnv(["SOME_ENV", "ANOTHER_ENV"]);
+export const ensureEnv = createEnsureEnv(["DATABASE_URL"]);

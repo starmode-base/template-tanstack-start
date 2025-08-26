@@ -1,9 +1,9 @@
 {
-  "name": "TanStack Start Template by STΛR MODΞ",
-  "description": "TanStack Start Template by STΛR MODΞ",
+  "name": "TanStack Start app template",
+  "description": "A TanStack Start template for apps",
   "browserIcon": "/icon.svg",
   "shareCardImage": "/open-graph.png",
   "dev": {
-    "port": 3000
+    "port": 3001
   }
 }

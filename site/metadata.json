@@ -1,6 +1,6 @@
 {
-  "name": "TanStack Start Template by STΛR MODΞ",
-  "description": "TanStack Start Template by STΛR MODΞ",
+  "name": "TanStack Start site template",
+  "description": "A TanStack Start template for sites",
   "browserIcon": "/icon.svg",
   "shareCardImage": "/open-graph.png",
   "dev": {
