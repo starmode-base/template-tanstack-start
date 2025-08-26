@@ -1,15 +1,17 @@
-# TanStack Start Template by STΛR MODΞ
+![STAR MODE - We help companies build better AI](site/public/open-graph.png)
 
-To install dependencies:
+<h1 align="center">TanStack Start templates</h1>
 
-```bash
-bun install
+<h3 align="center">Choose your weapon:</h3>
+
+#### [Site template](site)
+
+```sh
+bunx gitpick starmode-base/template-tanstack-start/tree/main/site starmode-site
 ```
 
-## Configured tools
+#### [App template](app)
 
-- [Vercel Analytics](https://vercel.com/docs/analytics)
-- [Vercel development environment variables](https://vercel.com/docs/environment-variables#development-environment-variables)
-- [Vitest](https://vitest.dev/)
-- [Prettier](https://prettier.io/)
-- ...and more
+```sh
+bunx gitpick starmode-base/template-tanstack-start/tree/main/app starmode-app
+```
