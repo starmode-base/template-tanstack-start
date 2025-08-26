@@ -2,7 +2,7 @@
 
 To install dependencies:
 
-```bash
+```sh
 bun install
 ```
 
