@@ -14,7 +14,6 @@ import { db, schema } from "~/postgres/db";
  */
 async function fetchClerkUserId(request: Request) {
   const { userId: clerkUserId } = await getAuth(request);
-  invariant(clerkUserId, "Unauthorized");
 
   return clerkUserId;
 }
@@ -37,7 +36,7 @@ function getClerkPrimaryEmailAddress(clerkUser: ClerkUser) {
 
   // Users always have an email address since we're using the email address to
   // sign up/in
-  invariant(email, "Unauthorized");
+  invariant(email, "Failed to get primary email address");
 
   return email;
 }
@@ -58,8 +57,6 @@ async function upsertViewer(clerkUserId: string) {
     })
     .returning();
 
-  invariant(viewer, "Failed to upsert viewer");
-
   return viewer;
 }
 
@@ -76,13 +73,14 @@ async function refreshViewerEmail(clerkUserId: string) {
     });
 }
 
-export const ensureViewerMiddleware = createMiddleware({
-  type: "function",
-}).server(async ({ next }) => {
-  console.log("🔧 Clerk middleware");
-
+/**
+ * Sync the viewer with the database
+ */
+async function syncViewer() {
   // Get the clerk user id
   const clerkUserId = await fetchClerkUserId(getWebRequest());
+
+  if (!clerkUserId) return null;
 
   // Upsert the viewer in the foreground
   const viewer = await upsertViewer(clerkUserId);
@@ -90,9 +88,35 @@ export const ensureViewerMiddleware = createMiddleware({
   // Refresh the viewer email in the background
   void refreshViewerEmail(clerkUserId);
 
+  return viewer;
+}
+
+/**
+ * Middleware to ensure the viewer is synced with the database
+ */
+export const ensureViewerMiddleware = createMiddleware({
+  type: "function",
+}).server(async ({ next }) => {
+  const viewer = await syncViewer();
+
+  if (!viewer) throw new Error("Unauthorized");
+
   return next({
     context: {
       viewer,
+    },
+  });
+});
+
+/**
+ * Middleware to ensure the viewer is synced with the database
+ */
+export const authStateMiddleware = createMiddleware({
+  type: "function",
+}).server(async ({ next }) => {
+  return next({
+    context: {
+      viewer: await syncViewer(),
     },
   });
 });

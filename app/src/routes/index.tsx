@@ -8,14 +8,14 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/tanstack-react-start";
-import { ensureViewerMiddleware } from "~/middleware/auth-middleware";
+import { authStateMiddleware } from "~/middleware/auth-middleware";
 
 const authStateFn = createServerFn({ method: "GET" })
-  .middleware([ensureViewerMiddleware])
+  .middleware([authStateMiddleware])
   .handler(({ context }) => {
     console.log("context", context);
 
-    return context.viewer.id;
+    return context.viewer?.id;
   });
 
 export const Route = createFileRoute("/")({
