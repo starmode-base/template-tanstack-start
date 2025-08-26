@@ -1,12 +1,17 @@
-# TanStack Start templates by STΛR MODΞ
+![STAR MODE - We help companies build better AI](site/public/open-graph.png)
 
-Choose your weapon:
+<h1 align="center">TanStack Start templates by STΛR MODΞ</h1>
 
-- [Site template](site)
-- [App template](app)
+<h3 align="center">Choose your weapon:</h3>
+
+#### [Site template](site)
 
 ```sh
-bunx gitpick https://github.com/starmode-base/template-tanstack-start/tree/main/site starmode-site
+bunx gitpick starmode-base/template-tanstack-start/tree/main/site starmode-site
+```
 
-bunx gitpick https://github.com/starmode-base/template-tanstack-start/tree/main/app starmode-app
+#### [App template](app)
+
+```sh
+bunx gitpick starmode-base/template-tanstack-start/tree/main/app starmode-app
 ```
