@@ -76,6 +76,8 @@ async function upsertViewer(clerkUserId: string) {
  * or null if the user is not signed in.
  */
 export async function syncViewer() {
+  console.debug("syncViewer");
+
   // Get the current clerk user id
   const clerkUserId = await fetchClerkUserId(getWebRequest());
 
