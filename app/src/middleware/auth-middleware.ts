@@ -6,7 +6,7 @@ import {
 import { invariant } from "@tanstack/react-router";
 import { createMiddleware } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
-import { sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db, schema } from "~/postgres/db";
 
 /**
@@ -42,15 +42,29 @@ function requireClerkPrimaryEmailAddress(clerkUser: ClerkUser) {
 }
 
 /**
- * Upsert viewer - syncs the clerk user to our database
+ * Get the viewer from the database
  */
-async function upsertViewerRecord(clerkUserId: string) {
+async function selectViewer(clerkUserId: string) {
+  const viewer = await db().query.users.findFirst({
+    where: eq(schema.users.clerkUserId, clerkUserId),
+  });
+
+  return viewer ?? null;
+}
+
+/**
+ * Upsert the viewer in the database from the Clerk API
+ */
+async function upsertViewer(clerkUserId: string) {
+  const clerkUser = await fetchClerkUser(clerkUserId);
+  const email = requireClerkPrimaryEmailAddress(clerkUser);
+
   const [viewer] = await db()
     .insert(schema.users)
-    .values({ clerkUserId, email: "PENDING" })
+    .values({ clerkUserId, email })
     .onConflictDoUpdate({
       target: [schema.users.clerkUserId],
-      set: { updatedAt: sql`now()` },
+      set: { email, updatedAt: sql`now()` },
     })
     .returning();
 
@@ -58,52 +72,40 @@ async function upsertViewerRecord(clerkUserId: string) {
 }
 
 /**
- * Update the viewer email address in the database from the Clerk API
- */
-async function refreshViewerEmail(clerkUserId: string) {
-  const clerkUser = await fetchClerkUser(clerkUserId);
-  const email = requireClerkPrimaryEmailAddress(clerkUser);
-
-  await db()
-    .insert(schema.users)
-    .values({ clerkUserId, email })
-    .onConflictDoUpdate({
-      target: [schema.users.clerkUserId],
-      set: { email, updatedAt: sql`now()` },
-    });
-}
-
-/**
- * Sync the Clerk user with the database and return the viewer, or null if the
- * user is not signed in.
- *
- * The email address is updated in the background, so it may be stale for a
- * short time. Eg. the returned viewer may have a stale email address.
+ * Sync the Clerk user (email address) with the database and return the viewer,
+ * or null if the user is not signed in.
  */
 export async function syncViewer() {
   // Get the current clerk user id
   const clerkUserId = await fetchClerkUserId(getWebRequest());
 
-  if (!clerkUserId) return null;
+  if (!clerkUserId) {
+    return null;
+  }
 
-  // Upsert the viewer in the foreground
-  const viewer = await upsertViewerRecord(clerkUserId);
-
-  // Refresh the viewer email in the background
-  void refreshViewerEmail(clerkUserId);
-
-  return viewer;
+  // Upsert and return the updated viewer
+  return upsertViewer(clerkUserId);
 }
 
 /**
- * Middleware to ensure the viewer is synced with the database
+ * Middleware to ensure the viewer is signed in and has a viewer record in the
+ * database.
  */
 export const ensureViewerMiddleware = createMiddleware({
   type: "function",
 }).server(async ({ next }) => {
-  const viewer = await syncViewer();
+  // Get the current clerk user id
+  const clerkUserId = await fetchClerkUserId(getWebRequest());
 
-  if (!viewer) throw new Error("Unauthorized");
+  if (!clerkUserId) {
+    throw new Error("Unauthorized");
+  }
+
+  const viewer = await selectViewer(clerkUserId);
+
+  if (!viewer) {
+    throw new Error("Unauthorized");
+  }
 
   return next({ context: { viewer } });
 });
