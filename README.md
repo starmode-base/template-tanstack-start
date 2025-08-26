@@ -1,6 +1,6 @@
 ![STAR MODE - We help companies build better AI](site/public/open-graph.png)
 
-<h1 align="center">TanStack Start templates by STΛR MODΞ</h1>
+<h1 align="center">TanStack Start templates</h1>
 
 <h3 align="center">Choose your weapon:</h3>
 
