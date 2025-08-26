@@ -74,9 +74,13 @@ async function refreshViewerEmail(clerkUserId: string) {
 }
 
 /**
- * Sync the Clerk user with the database
+ * Sync the Clerk user with the database and return the viewer, or null if the
+ * user is not signed in.
+ *
+ * The email address is updated in the background, so it may be stale for a
+ * short time. Eg. the returned viewer may have a stale email address.
  */
-async function syncViewer() {
+export async function syncViewer() {
   // Get the current clerk user id
   const clerkUserId = await fetchClerkUserId(getWebRequest());
 
@@ -101,22 +105,5 @@ export const ensureViewerMiddleware = createMiddleware({
 
   if (!viewer) throw new Error("Unauthorized");
 
-  return next({
-    context: {
-      viewer,
-    },
-  });
-});
-
-/**
- * Middleware to ensure the viewer is synced with the database
- */
-export const authStateMiddleware = createMiddleware({
-  type: "function",
-}).server(async ({ next }) => {
-  return next({
-    context: {
-      viewer: await syncViewer(),
-    },
-  });
+  return next({ context: { viewer } });
 });

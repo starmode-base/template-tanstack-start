@@ -5,11 +5,9 @@ import metadata from "../../metadata.json";
 import { inject } from "@vercel/analytics";
 import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { createServerFn } from "@tanstack/react-start";
-import { authStateMiddleware } from "~/middleware/auth-middleware";
+import { syncViewer } from "~/middleware/auth-middleware";
 
-const authStateFn = createServerFn({ method: "GET" })
-  .middleware([authStateMiddleware])
-  .handler(({ context }) => context.viewer);
+const authStateFn = createServerFn({ method: "GET" }).handler(syncViewer);
 
 export const Route = createRootRoute({
   beforeLoad: async () => ({
