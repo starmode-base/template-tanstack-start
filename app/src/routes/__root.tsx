@@ -7,7 +7,9 @@ import { ClerkProvider } from "@clerk/tanstack-react-start";
 import { createServerFn } from "@tanstack/react-start";
 import { syncViewer } from "~/middleware/auth-middleware";
 
-const authStateFn = createServerFn({ method: "GET" }).handler(syncViewer);
+const authStateFn = createServerFn({ method: "GET" }).handler(() => {
+  return syncViewer();
+});
 
 export const Route = createRootRoute({
   beforeLoad: async () => ({
