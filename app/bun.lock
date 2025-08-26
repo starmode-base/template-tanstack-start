@@ -4,7 +4,7 @@
     "": {
       "name": "template-tanstack-start",
       "dependencies": {
-        "@clerk/tanstack-react-start": "^0.22.4",
+        "@clerk/tanstack-react-start": "^0.23.0",
         "@neondatabase/serverless": "^1.0.1",
         "@tailwindcss/vite": "^4.1.12",
         "@tanstack/react-router": "^1.131.28",
@@ -108,7 +108,7 @@
 
     "@clerk/shared": ["@clerk/shared@3.22.1", "", { "dependencies": { "@clerk/types": "^4.82.0", "dequal": "2.0.3", "glob-to-regexp": "0.4.1", "js-cookie": "3.0.5", "std-env": "^3.9.0", "swr": "2.3.4" }, "peerDependencies": { "react": "^18.0.0 || ^19.0.0 || ^19.0.0-0", "react-dom": "^18.0.0 || ^19.0.0 || ^19.0.0-0" }, "optionalPeers": ["react", "react-dom"] }, "sha512-b2CLuMiMlAoHo1FXaTXhLzFeaXZP2IiWj0hv2LA4uZDR7U+WuXby6+Wew6edpCMARg2gmnJTQSr7Ly2uuusCcw=="],
 
-    "@clerk/tanstack-react-start": ["@clerk/tanstack-react-start@0.22.4", "", { "dependencies": { "@clerk/backend": "^2.9.4", "@clerk/clerk-react": "^5.43.1", "@clerk/shared": "^3.22.0", "@clerk/types": "^4.81.0", "tslib": "2.8.1" }, "peerDependencies": { "@tanstack/react-router": "^1.127.0", "@tanstack/react-start": "^1.127.0", "react": "^18.0.0 || ^19.0.0 || ^19.0.0-0", "react-dom": "^18.0.0 || ^19.0.0 || ^19.0.0-0" } }, "sha512-rqWs56bvHymxEpTSEXeoDEE/bKO0ARm/vSkxYkHaIrcZuIFOeNr42rl9E5SPUpSuf42f2O4MzZTz9u43sqzMGA=="],
+    "@clerk/tanstack-react-start": ["@clerk/tanstack-react-start@0.23.0", "", { "dependencies": { "@clerk/backend": "^2.10.0", "@clerk/clerk-react": "^5.44.0", "@clerk/shared": "^3.22.1", "@clerk/types": "^4.82.0", "tslib": "2.8.1" }, "peerDependencies": { "@tanstack/react-router": "^1.131.0", "@tanstack/react-start": "^1.131.0", "react": "^18.0.0 || ^19.0.0 || ^19.0.0-0", "react-dom": "^18.0.0 || ^19.0.0 || ^19.0.0-0" } }, "sha512-Ja1Uq8I4hFAT6Gxp2RjoM9xfKBGJSaGMoSQgwSZ3oNf+wBGeADYeFTiK2wnYDAmkULmp2TuhxqKtWtaUsnqHOA=="],
 
     "@clerk/types": ["@clerk/types@4.82.0", "", { "dependencies": { "csstype": "3.1.3" } }, "sha512-vUgT3Wvu2HkCuvsVyaEykiMs/vYSLnjK9aBSubE7SbPYqlOTQRsOgfnmHHUdhB9gZIxkcy6SIZwLpZxPTtNMsw=="],
 
@@ -680,7 +680,7 @@
 
     "combined-stream": ["combined-stream@1.0.8", "", { "dependencies": { "delayed-stream": "~1.0.0" } }, "sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg=="],
 
-    "commander": ["commander@10.0.1", "", {}, "sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug=="],
+    "commander": ["commander@2.20.3", "", {}, "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="],
 
     "common-path-prefix": ["common-path-prefix@3.0.0", "", {}, "sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w=="],
 
@@ -1942,6 +1942,8 @@
 
     "is-inside-container/is-docker": ["is-docker@3.0.0", "", { "bin": { "is-docker": "cli.js" } }, "sha512-eljcgEDlEns/7AXFosB5K/2nCM4P7FQPkGc/DWLy5rmFEWvZayGrik1d9/QIY5nJ4f9YsVvBkA6kJpHn9rISdQ=="],
 
+    "lambda-local/commander": ["commander@10.0.1", "", {}, "sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug=="],
+
     "lambda-local/dotenv": ["dotenv@16.6.1", "", {}, "sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow=="],
 
     "lazystream/readable-stream": ["readable-stream@2.3.8", "", { "dependencies": { "core-util-is": "~1.0.0", "inherits": "~2.0.3", "isarray": "~1.0.0", "process-nextick-args": "~2.0.0", "safe-buffer": "~5.1.1", "string_decoder": "~1.1.1", "util-deprecate": "~1.0.1" } }, "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA=="],
@@ -1999,8 +2001,6 @@
     "send/mime-types": ["mime-types@3.0.1", "", { "dependencies": { "mime-db": "^1.54.0" } }, "sha512-xRc4oEhT6eaBpU1XF7AjpOFD+xQmXNB5OVKwp4tqCuBpHLS/ZbBDrc07mYTDqVMg6PfxUjjNp85O6Cd2Z/5HWA=="],
 
     "strip-literal/js-tokens": ["js-tokens@9.0.1", "", {}, "sha512-mxa9E9ITFOt0ban3j6L5MpjwegGz6lBQmM1IJkWeBZGcMxto50+eWdjC/52xDbS2vy0k7vIMK0Fe2wfL9OQSpQ=="],
-
-    "terser/commander": ["commander@2.20.3", "", {}, "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="],
 
     "unenv/mime": ["mime@3.0.0", "", { "bin": { "mime": "cli.js" } }, "sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A=="],
 
