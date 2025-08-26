@@ -30,28 +30,24 @@ import { sql } from "drizzle-orm";
 /**
  * Primary key
  */
-const idField = () =>
+const primaryKeyField = () =>
   text()
     .primaryKey()
     .default(sql`gen_secure_token()`);
 
-/** Created at */
-const createdAtField = () =>
-  timestamp({ mode: "string" }).defaultNow().notNull();
-
-/** Updated at */
-const updatedAtField = () =>
+/** Timestamp with default NOW() */
+const timestampField = () =>
   timestamp({ mode: "string" }).defaultNow().notNull();
 
 /** Decimal type with 2 decimal places */
-export const decimal2 = () =>
+export const decimal2Field = () =>
   numeric({ scale: 2, precision: 18, mode: "number" });
 
 /** Base schema for most tables */
 const baseSchema = {
-  id: idField(),
-  createdAt: createdAtField(),
-  updatedAt: updatedAtField(),
+  id: primaryKeyField(),
+  createdAt: timestampField(),
+  updatedAt: timestampField(),
 };
 
 /**
@@ -96,8 +92,8 @@ export const organizationMemberships = pgTable(
     userId: text()
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    createdAt: createdAtField(),
-    updatedAt: updatedAtField(),
+    createdAt: timestampField(),
+    updatedAt: timestampField(),
     role: memberRole().notNull(),
   },
   (table) => [primaryKey({ columns: [table.organizationId, table.userId] })],
