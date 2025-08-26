@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/neon-serverless";
-import { lazySingleton } from "neon-testing";
+import { lazySingleton } from "neon-testing/utils";
 import * as schema from "./schema";
 import * as relations from "./relations";
 import { ensureEnv } from "~/lib/env";
