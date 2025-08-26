@@ -18,6 +18,7 @@
  * ```
  */
 import {
+  boolean,
   numeric,
   pgEnum,
   pgTable,
@@ -68,8 +69,11 @@ export const users = pgTable("users", {
   ...baseSchema,
   email: text().notNull(),
   clerkUserId: text().notNull().unique(),
+  isSuperuser: boolean().notNull().default(false),
 });
-export type UserRecord = typeof users.$inferSelect;
+
+export type UserSelect = typeof users.$inferSelect;
+export type UserInsert = typeof users.$inferInsert;
 
 /**
  * Organizations table
@@ -78,7 +82,9 @@ export const organizations = pgTable("organizations", {
   ...baseSchema,
   name: text().notNull(),
 });
-export type OrganizationRecord = typeof organizations.$inferSelect;
+
+export type OrganizationSelect = typeof organizations.$inferSelect;
+export type OrganizationInsert = typeof organizations.$inferInsert;
 
 /**
  * Organization memberships junction table
@@ -98,5 +104,8 @@ export const organizationMemberships = pgTable(
   },
   (table) => [primaryKey({ columns: [table.organizationId, table.userId] })],
 );
-export type OrganizationMembershipRecord =
+
+export type OrganizationMembershipSelect =
   typeof organizationMemberships.$inferSelect;
+export type OrganizationMembershipInsert =
+  typeof organizationMemberships.$inferInsert;
