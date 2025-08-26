@@ -12,15 +12,8 @@
     {
       "idx": 1,
       "version": "7",
-      "when": 1756218439363,
-      "tag": "0001_steady_adam_destine",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1756219697917,
-      "tag": "0002_silent_invaders",
+      "when": 1756247119712,
+      "tag": "0001_first_king_bedlam",
       "breakpoints": true
     }
   ]

@@ -21,6 +21,7 @@ CREATE TABLE "users" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"email" text NOT NULL,
 	"clerk_user_id" text NOT NULL,
+	"is_superuser" boolean DEFAULT false NOT NULL,
 	CONSTRAINT "users_clerkUserId_unique" UNIQUE("clerk_user_id")
 );
 --> statement-breakpoint

@@ -1,5 +1,5 @@
 {
-  "id": "b81c2392-f4d6-4cf2-b81d-598e97c00ce2",
+  "id": "3f9c8a8f-8536-441f-840f-fa603195dfdc",
   "prevId": "de69238d-1aa0-4eb4-83bb-1d08efddc034",
   "version": "7",
   "dialect": "postgresql",
@@ -161,6 +161,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "is_superuser": {
+          "name": "is_superuser",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {},
