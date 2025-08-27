@@ -4,14 +4,14 @@
 
 <h3 align="center">Choose your weapon:</h3>
 
-#### [Site template](site)
-
-```sh
-bunx gitpick starmode-base/template-tanstack-start/tree/main/site starmode-site
-```
-
 #### [App template](app)
 
 ```sh
 bunx gitpick starmode-base/template-tanstack-start/tree/main/app starmode-app
+```
+
+#### [Site template](site)
+
+```sh
+bunx gitpick starmode-base/template-tanstack-start/tree/main/site starmode-site
 ```
