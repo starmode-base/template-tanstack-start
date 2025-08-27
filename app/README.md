@@ -15,11 +15,6 @@ https://template-tanstack-start-app.vercel.app/
    - Which scope should contain your project? STAR MODE
    - Found project “starmode/new-dawn-app”. Link to it? yes
 
-Alt
-
-1. Create a Vercel project `bunx vercel --scope starmode project add new-dawn-app`
-1. Link this Git repo to the project `bunx vercel --scope starmode git connect`
-
 ### Local development
 
 1. Pull development environment variables from Vercel: `bun env:pull`
@@ -31,24 +26,40 @@ To install dependencies:
 bun install
 ```
 
-## Ops
+## Devops
 
-- [Clerk](https://clerk.com/)
-- [GitHub](https://github.com/)
-- [Neon](https://console.neon.tech/)
-- [Vercel](https://vercel.com/)
+- [Clerk](https://dashboard.clerk.com/apps/)
+- [GitHub](https://github.com/starmode-base/template-tanstack-start)
+- [Neon](https://console.neon.tech/app/projects/calm-forest-40252170)
+- [Vercel](https://vercel.com/starmode/template-tanstack-start-app)
 
-Neon
+### Setup services
 
-- https://vercel.com/marketplace/neon
-- https://neon.com/docs/guides/neon-managed-vercel-integration
-- NOT: https://neon.com/docs/guides/vercel-managed-integration
+#### Vercel
 
-Clerk
+1. Go to https://vercel.com/
+1. Click _Add New..._ → _Project_
+1. Pick `new-dawn-app` from the list → _Import_
+1. Set a _Project Name_ → Click _Deploy_
 
-- https://dashboard.clerk.com/apps/new
-- Copy Clerk env vars and add them to https://vercel.com/starmode/template-tanstack-start-app/settings/environment-variables
-- env:pull
+#### Neon
+
+Make sure you have installed the [Vercel integration](https://vercel.com/marketplace/neon). Select the _Link Existing Neon Account_, not the _Create New Neon Account_.
+
+IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration), not the [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration).
+
+1. Go to https://console.neon.tech/
+1. Click _New project_
+1. Pick a name and click _Create_
+1. Go to _Integrations_ → _Vercel_
+1. Select _Vercel project_
+1. Run `bun env:pull`
+
+#### Clerk
+
+1. Go to https://dashboard.clerk.com/apps/new
+1. Copy Clerk env vars to [Vercel Environment Variables](https://vercel.com/starmode/template-tanstack-start-app/settings/environment-variables)
+1. Run `bun env:pull`
 
 ## Configured tools
 
