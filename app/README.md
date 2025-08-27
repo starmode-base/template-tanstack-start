@@ -1,6 +1,39 @@
-# New dawn app
+# Touch
 
-https://template-tanstack-start-app.vercel.app/
+https://app-template.starmode.dev/
+
+## Configure services
+
+Placeholder project name (for simple search and replace): `new-dawn`
+
+### Configure Vercel Serverless
+
+1. Go to https://vercel.com/
+1. Click _Add New..._ → _Project_
+1. Pick `new-dawn` from the list → _Import_
+1. Click _Deploy_
+
+### Configure Vercel Analytics
+
+1. Enable [Web Analytics](https://vercel.com/starmode/new-dawn/analytics)
+
+### Configure Neon
+
+Make sure you have installed the [Vercel integration](https://vercel.com/marketplace/neon). Select the _Link Existing Neon Account_, not the _Create New Neon Account_.
+
+IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration), not the [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration).
+
+1. Go to https://console.neon.tech/
+1. Click _New project_
+1. Pick a name and click _Create_
+1. Go to _Integrations_ → _Vercel_
+1. Select _Vercel project_
+
+### Configure Clerk
+
+1. Go to https://dashboard.clerk.com/apps/new
+1. After creating the Clerk application, find the correct environment variables here https://clerk.com/docs/quickstarts/tanstack-react-start#set-your-clerk-api-keys
+1. Copy the Clerk environment variables to [Vercel Environment Variables](https://vercel.com/starmode/new-dawn/settings/environment-variables)
 
 ## Contributing
 
@@ -8,12 +41,13 @@ https://template-tanstack-start-app.vercel.app/
 
 1. Install [Node.js](https://nodejs.org/) (v22.x)
 1. Install [Bun](https://bun.sh/)
-1. Clone the [git repo](https://github.com/starmode-base/new-dawn-app)
+1. Clone the [git repo](https://github.com/starmode-base/new-dawn)
 1. Install dependencies: `bun install`
 1. Link the Vercel project, to be able to pull development environment variables from Vercel: `bunx vercel link`
-   - Set up “~/starmode-base/new-dawn-app? yes
+   - Set up “~/starmode-base/new-dawn”? yes
    - Which scope should contain your project? STAR MODE
-   - Found project “starmode/new-dawn-app”. Link to it? yes
+   - Found project “starmode/new-dawn”. Link to it? yes
+   - ✅ Linked to starmode/new-dawn (created .vercel)
 
 ### Local development
 
@@ -29,41 +63,11 @@ bun install
 ## Devops
 
 - [Clerk](https://dashboard.clerk.com/apps/)
-- [GitHub](https://github.com/starmode-base/template-tanstack-start)
+- [GitHub](https://github.com/starmode-base/new-dawn)
 - [Neon](https://console.neon.tech/app/projects/calm-forest-40252170)
-- [Vercel](https://vercel.com/starmode/template-tanstack-start-app)
-- [Vercel Analytics](https://vercel.com/starmode/template-tanstack-start-app/analytics)
-- [Vercel Environment Variables](https://vercel.com/starmode/template-tanstack-start-app/settings/environment-variables)
-
-### Configure Vercel Serverless
-
-1. Go to https://vercel.com/
-1. Click _Add New..._ → _Project_
-1. Pick `new-dawn-app` from the list → _Import_
-1. Set a _Project Name_ → Click _Deploy_
-
-### Configure Vercel Analytics
-
-1. Enable [Web Analytics](https://vercel.com/starmode/template-tanstack-start-app/analytics)
-
-### Configure Neon
-
-Make sure you have installed the [Vercel integration](https://vercel.com/marketplace/neon). Select the _Link Existing Neon Account_, not the _Create New Neon Account_.
-
-IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-managed-vercel-integration), not the [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration).
-
-1. Go to https://console.neon.tech/
-1. Click _New project_
-1. Pick a name and click _Create_
-1. Go to _Integrations_ → _Vercel_
-1. Select _Vercel project_
-1. Run `bun env:pull`
-
-### Configure Clerk
-
-1. Go to https://dashboard.clerk.com/apps/new
-1. Copy Clerk env vars to [Vercel Environment Variables](https://vercel.com/starmode/template-tanstack-start-app/settings/environment-variables)
-1. Run `bun env:pull`
+- [Vercel](https://vercel.com/starmode/new-dawn)
+- [Vercel Analytics](https://vercel.com/starmode/new-dawn/analytics)
+- [Vercel Environment Variables](https://vercel.com/starmode/new-dawn/settings/environment-variables)
 
 ## Configured tools
 
