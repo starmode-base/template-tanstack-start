@@ -50,6 +50,28 @@ function Home() {
           </div>
         </div>
       </SignedOut>
+      <div className="flex flex-1">
+        <div className="m-auto flex flex-col gap-2 pb-10 text-center">
+          <div className="text-2xl font-semibold text-slate-900">
+            TanStack Start template for apps
+          </div>
+          <div className="text-slate-600">
+            A modern, full-stack React application starter
+          </div>
+          <div className="text-sm text-slate-500">
+            Built with TanStack Router, Clerk Auth, and more
+          </div>
+          <div>
+            <a
+              href="https://github.com/starmode-base/template-tanstack-start"
+              target="_blank"
+              className="text-sky-500 underline hover:text-sky-600"
+            >
+              Get the template →
+            </a>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
