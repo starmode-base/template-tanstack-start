@@ -1,4 +1,4 @@
-# Touch
+# New dawn app template
 
 https://app-template.starmode.dev/
 
