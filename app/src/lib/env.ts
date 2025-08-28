@@ -110,7 +110,7 @@ function createEnsureEnv<const T extends readonly string[]>(config: {
 }
 
 export const ensureEnv = createEnsureEnv({
-  appEnvs: ["DATABASE_URL"],
+  appEnvs: ["DATABASE_URL", "NEON_API_KEY", "NEON_PROJECT_ID"],
   defaults: {
     VERCEL_ENV: "development",
   },

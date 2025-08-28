@@ -29,6 +29,13 @@ IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-
 1. Go to _Integrations_ → _Vercel_
 1. Select _Vercel project_
 
+### Configure neon-testing
+
+1. Create a [Neon API key](https://neon.com/docs/manage/api-keys)
+1. Save the API key as `NEON_API_KEY` in [Vercel Environment Variables](https://vercel.com/starmode/new-dawn/settings/environment-variables)
+1. Find your [Neon Project ID](https://console.neon.tech/app/projects/calm-forest-40252170/settings)
+1. Save the Project ID as `NEON_PROJECT_ID` in [Vercel Environment Variables](https://vercel.com/starmode/new-dawn/settings/environment-variables)
+
 ### Configure Clerk
 
 1. Go to https://dashboard.clerk.com/apps/new
