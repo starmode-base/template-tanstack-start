@@ -28,15 +28,25 @@ function RootDocument(props: React.PropsWithChildren) {
   inject();
 
   return (
-    <html>
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {props.children}
-        <TanStackRouterDevtools position="bottom-right" />
-        <Scripts />
-      </body>
-    </html>
+    <Providers>
+      <html>
+        <head>
+          <HeadContent />
+        </head>
+        <body>
+          <RootLayout>{props.children}</RootLayout>
+          <TanStackRouterDevtools position="bottom-right" />
+          <Scripts />
+        </body>
+      </html>
+    </Providers>
   );
+}
+
+function Providers(props: React.PropsWithChildren) {
+  return <>{props.children}</>;
+}
+
+function RootLayout(props: React.PropsWithChildren) {
+  return <>{props.children}</>;
 }

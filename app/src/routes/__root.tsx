@@ -38,17 +38,25 @@ function RootDocument(props: React.PropsWithChildren) {
   inject();
 
   return (
-    <ClerkProvider>
+    <Providers>
       <html>
         <head>
           <HeadContent />
         </head>
         <body>
-          {props.children}
+          <RootLayout>{props.children}</RootLayout>
           <TanStackRouterDevtools position="bottom-right" />
           <Scripts />
         </body>
       </html>
-    </ClerkProvider>
+    </Providers>
   );
+}
+
+function Providers(props: React.PropsWithChildren) {
+  return <ClerkProvider>{props.children}</ClerkProvider>;
+}
+
+function RootLayout(props: React.PropsWithChildren) {
+  return <>{props.children}</>;
 }
