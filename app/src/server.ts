@@ -1,14 +1,15 @@
-/**
- * https://github.com/clerk/javascript/blob/main/packages/tanstack-react-start/CHANGELOG.md
- */
 import {
   createStartHandler,
   defaultStreamHandler,
 } from "@tanstack/react-start/server";
-import { createRouter } from "./router";
 import { createClerkHandler } from "@clerk/tanstack-react-start/server";
+import { createRouter } from "./router";
 
-export default createClerkHandler(
-  createStartHandler({ createRouter }),
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-)(defaultStreamHandler);
+const handler = createStartHandler({
+  createRouter,
+});
+
+const clerkHandler = createClerkHandler(handler);
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+export default clerkHandler(defaultStreamHandler);

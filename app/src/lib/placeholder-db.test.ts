@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { Pool } from "@neondatabase/serverless";
 import { db, schema } from "~/postgres/db";
-import { withNeonTestBranch } from "./test-setup";
+import { withNeonTestBranch } from "./neon-testing";
 
 // Enable Neon test branch for this test file
 withNeonTestBranch();
