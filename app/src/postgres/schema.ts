@@ -28,9 +28,7 @@ import {
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
-/**
- * Primary key
- */
+/** Primary key */
 const primaryKeyField = () =>
   text()
     .primaryKey()
@@ -52,15 +50,17 @@ const baseSchema = {
 };
 
 /**
- * Member role enum
+ * Workspace member role enum
  */
-export const memberRole = pgEnum("member_role", [
-  /** Organization administrator */
-  "ADMINISTRATOR",
-  /** Organization member */
-  "MEMBER",
+export const workspaceMemberRole = pgEnum("workspace_member_role", [
+  /** Workspace administrator */
+  "administrator",
+  /** Workspace member */
+  "member",
 ]);
-export type MemberRole = (typeof memberRole.enumValues)[number];
+
+export type WorkspaceMemberRole =
+  (typeof workspaceMemberRole.enumValues)[number];
 
 /**
  * Users table
@@ -76,36 +76,39 @@ export type UserSelect = typeof users.$inferSelect;
 export type UserInsert = typeof users.$inferInsert;
 
 /**
- * Organizations table
+ * Workspaces table
  */
-export const organizations = pgTable("organizations", {
+export const workspaces = pgTable("workspaces", {
   ...baseSchema,
   name: text().notNull(),
 });
 
-export type OrganizationSelect = typeof organizations.$inferSelect;
-export type OrganizationInsert = typeof organizations.$inferInsert;
+export type WorkspaceSelect = typeof workspaces.$inferSelect;
+export type WorkspaceInsert = typeof workspaces.$inferInsert;
 
 /**
- * Organization memberships junction table
+ * Workspace memberships junction table
  */
-export const organizationMemberships = pgTable(
-  "organization_memberships",
+export const workspaceMemberships = pgTable(
+  "workspace_memberships",
   {
-    organizationId: text()
-      .notNull()
-      .references(() => organizations.id, { onDelete: "cascade" }),
+    workspaceId: text()
+      .references(() => workspaces.id, { onDelete: "cascade" })
+      .notNull(),
     userId: text()
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
     createdAt: timestampField(),
     updatedAt: timestampField(),
-    role: memberRole().notNull(),
+    role: workspaceMemberRole().notNull(),
   },
-  (table) => [primaryKey({ columns: [table.organizationId, table.userId] })],
+  (t) => [
+    // Enforce: a user can only be a member of a workspace once
+    primaryKey({ columns: [t.workspaceId, t.userId] }),
+  ],
 );
 
-export type OrganizationMembershipSelect =
-  typeof organizationMemberships.$inferSelect;
-export type OrganizationMembershipInsert =
-  typeof organizationMemberships.$inferInsert;
+export type WorkspaceMembershipSelect =
+  typeof workspaceMemberships.$inferSelect;
+export type WorkspaceMembershipInsert =
+  typeof workspaceMemberships.$inferInsert;
