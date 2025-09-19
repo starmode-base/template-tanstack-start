@@ -4,7 +4,7 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import metadata from "./metadata.json";
-import { neonTesting } from "neon-testing/utils";
+import { neonTesting } from "neon-testing/vite";
 
 export default defineConfig({
   server: {
@@ -18,3 +18,6 @@ export default defineConfig({
     neonTesting(),
   ],
 });
+
+// https://touch.ax/
+// https://touchcrm.app/
