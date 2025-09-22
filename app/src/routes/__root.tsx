@@ -26,8 +26,15 @@ export const Route = createRootRoute({
       { name: "og:image", content: metadata.shareCardImage },
     ],
     links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: `${metadata.browserIcon}?x7k9m2p4` },
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+      {
+        rel: "icon",
+        href: `${metadata.browserIcon}?hyVEFq1y`,
+        type: "image/svg+xml",
+      },
     ],
   }),
   shellComponent: RootDocument,
