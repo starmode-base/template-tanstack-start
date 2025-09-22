@@ -1,8 +1,8 @@
 {
   "name": "TanStack Start site template - New Dawn",
   "description": "A TanStack Start template for sites - New Dawn",
-  "browserIcon": "/icon.svg",
-  "shareCardImage": "/open-graph.png",
+  "browserIcon": "/icon.svg?hyVEFq1y",
+  "shareCardImage": "/open-graph.png?hyVEFq1y",
   "dev": {
     "port": 3000
   }
