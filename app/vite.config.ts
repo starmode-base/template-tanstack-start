@@ -18,6 +18,3 @@ export default defineConfig({
     neonTesting(),
   ],
 });
-
-// https://touch.ax/
-// https://touchcrm.app/
