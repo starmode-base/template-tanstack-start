@@ -44,8 +44,10 @@ function RootDocument(props: React.PropsWithChildren) {
           <HeadContent />
         </head>
         <body>
-          <RootLayout>{props.children}</RootLayout>
-          <TanStackRouterDevtools position="bottom-right" />
+          <Shell>{props.children}</Shell>
+          <div className="print:hidden">
+            <TanStackRouterDevtools position="bottom-right" />
+          </div>
           <Scripts />
         </body>
       </html>
@@ -57,6 +59,6 @@ function Providers(props: React.PropsWithChildren) {
   return <ClerkProvider>{props.children}</ClerkProvider>;
 }
 
-function RootLayout(props: React.PropsWithChildren) {
+function Shell(props: React.PropsWithChildren) {
   return <>{props.children}</>;
 }
