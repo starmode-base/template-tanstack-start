@@ -3,7 +3,9 @@ import { Pool } from "@neondatabase/serverless";
 import { db, schema } from "~/postgres/db";
 import { withNeonTestBranch } from "./neon-testing";
 
-// Enable Neon test branch for this test file
+/**
+ * Enable Neon Postgres integration tests
+ */
 withNeonTestBranch();
 
 test("Neon WebSocket database operations", async () => {
