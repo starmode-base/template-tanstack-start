@@ -14,8 +14,8 @@
     "lint": "eslint --max-warnings 0 --fix",
     "test": "vitest",
     "env:pull": "bunx vercel@latest env pull .env",
-    "clean:soft": "rm -rf node_modules tsconfig.tsbuildinfo .nitro .output .tanstack && bun install",
-    "clean:hard": "rm -rf node_modules tsconfig.tsbuildinfo .nitro .output .tanstack bun.lock && bun install"
+    "clean:soft": "rm -rf node_modules tsconfig.tsbuildinfo .nitro .output dist && bun install",
+    "clean:hard": "rm -rf node_modules tsconfig.tsbuildinfo .nitro .output dist bun.lock && bun install"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
@@ -36,6 +36,7 @@
     "@types/react": "^19.1.15",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.4",
+    "dotenv": "^17.2.2",
     "eslint": "^9.36.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",

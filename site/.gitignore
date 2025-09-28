@@ -4,7 +4,7 @@
 # Build
 /.nitro/
 /.output/
-/.tanstack/
+/dist/
 
 # Environment
 /.env
