@@ -17,7 +17,7 @@ const getCount = createServerFn({
 });
 
 const updateCount = createServerFn({ method: "POST" })
-  .validator((d: number) => d)
+  .inputValidator((d: number) => d)
   .handler(async ({ data }) => {
     const count = await readCount();
     await fs.promises.writeFile(filePath, `${count + data}`);
@@ -41,7 +41,6 @@ function Home() {
             void router.invalidate();
           });
         }}
-        className="m-auto rounded bg-amber-700 px-2 py-1 text-white"
       >
         Add 1 to {state}?
       </button>
