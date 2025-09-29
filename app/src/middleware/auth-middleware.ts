@@ -7,7 +7,7 @@ import { db, schema } from "~/postgres/db";
 /**
  * Upsert the viewer in the database from the Clerk API
  */
-async function upsertViewer(clerkUser: { id: string; email: string }) {
+export async function upsertViewer(clerkUser: { id: string; email: string }) {
   const [viewer] = await db()
     .insert(schema.users)
     .values({
