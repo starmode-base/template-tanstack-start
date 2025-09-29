@@ -1,6 +1,5 @@
 import { getAuth } from "@clerk/tanstack-react-start/server";
 import { getWebRequest } from "@tanstack/react-start/server";
-import { createMiddleware } from "@tanstack/react-start";
 import { sql } from "drizzle-orm";
 import { db, schema } from "~/postgres/db";
 
@@ -67,29 +66,3 @@ export async function syncViewer() {
   console.debug("syncViewer", performance.now() - t);
   return viewer;
 }
-
-/**
- * Middleware to ensure the viewer is signed in and has a viewer record in the
- * database.
- */
-export const ensureViewerMiddleware = createMiddleware({
-  type: "function",
-}).server(async ({ next }) => {
-  const t = performance.now();
-
-  // Get the current clerk user id
-  const clerkUser = await getClerkUser(getWebRequest());
-
-  if (!clerkUser) {
-    throw new Error("Unauthorized");
-  }
-
-  const viewer = await upsertViewer(clerkUser);
-
-  if (!viewer) {
-    throw new Error("Unauthorized");
-  }
-
-  console.debug("ensureViewerMiddleware", performance.now() - t);
-  return next({ context: { viewer } });
-});
