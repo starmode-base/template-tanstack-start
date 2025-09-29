@@ -1,25 +1,28 @@
-import { getAuth } from "@clerk/tanstack-react-start/server";
 import { createMiddleware } from "@tanstack/react-start";
 import { getWebRequest } from "@tanstack/react-start/server";
-import { eq } from "drizzle-orm";
+import { sql } from "drizzle-orm";
+import { getClerkUser } from "~/auth/clerk";
 import { db, schema } from "~/postgres/db";
 
 /**
- * Fetch the clerk user id from the Clerk API
+ * Upsert the viewer in the database from the Clerk API
  */
-async function fetchClerkUserId(request: Request) {
-  const session = await getAuth(request);
-
-  return session.userId;
-}
-
-/**
- * Get the viewer from the database
- */
-async function selectViewer(clerkUserId: string) {
-  const viewer = await db().query.users.findFirst({
-    where: eq(schema.users.clerkUserId, clerkUserId),
-  });
+async function upsertViewer(clerkUser: { id: string; email: string }) {
+  const [viewer] = await db()
+    .insert(schema.users)
+    .values({
+      clerkUserId: clerkUser.id,
+      email: clerkUser.email,
+    })
+    .onConflictDoUpdate({
+      target: [schema.users.clerkUserId],
+      set: {
+        email: clerkUser.email,
+        // Only update the updatedAt field if the email is different
+        updatedAt: sql`case when excluded.email is distinct from ${schema.users.email} then now() else ${schema.users.updatedAt} end`,
+      },
+    })
+    .returning();
 
   return viewer ?? null;
 }
@@ -32,13 +35,15 @@ export const ensureViewerMiddleware = createMiddleware({
   type: "function",
 }).server(async ({ next }) => {
   // Get the current clerk user id
-  const clerkUserId = await fetchClerkUserId(getWebRequest());
+  const clerkUser = await getClerkUser(getWebRequest());
 
-  if (!clerkUserId) {
+  if (!clerkUser) {
     throw new Error("Unauthorized");
   }
 
-  const viewer = await selectViewer(clerkUserId);
+  const t = performance.now();
+  const viewer = await upsertViewer(clerkUser);
+  console.debug("upsertViewer", performance.now() - t);
 
   if (!viewer) {
     throw new Error("Unauthorized");

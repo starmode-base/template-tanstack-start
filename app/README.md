@@ -41,6 +41,12 @@ IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-
 1. Go to https://dashboard.clerk.com/apps/new
 1. After creating the Clerk application, find the correct environment variables here https://clerk.com/docs/quickstarts/tanstack-react-start#set-your-clerk-api-keys
 1. Copy the Clerk environment variables to [Vercel Environment Variables](https://vercel.com/starmode/new-dawn/settings/environment-variables)
+1. Customize session token, go to _Configure_ → _Sessions_, and set _Claims_ to:
+   ```json
+   {
+     "email": "{{user.primary_email_address}}"
+   }
+   ```
 
 ## Contributing
 
