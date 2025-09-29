@@ -7,6 +7,7 @@ import { upsertViewer } from "~/middleware/auth-middleware";
  */
 export const getClerkUser = async (request: Request) => {
   const t = performance.now();
+
   const { sessionClaims, userId, isAuthenticated } = await getAuth(request);
 
   if (!isAuthenticated) {
@@ -22,7 +23,6 @@ export const getClerkUser = async (request: Request) => {
   }
 
   console.debug("getClerkUser", performance.now() - t);
-
   return { id: userId, email: sessionClaims.email };
 };
 
@@ -31,9 +31,8 @@ export const getClerkUser = async (request: Request) => {
  * or null if the user is not signed in.
  */
 export async function syncViewer() {
-  console.debug("syncViewer");
+  const t = performance.now();
 
-  // Get the current clerk user id
   const clerkUserId = await getClerkUser(getWebRequest());
 
   if (!clerkUserId) {
@@ -41,5 +40,8 @@ export async function syncViewer() {
   }
 
   // Upsert and return the updated viewer
-  return upsertViewer(clerkUserId);
+  const viewer = await upsertViewer(clerkUserId);
+
+  console.debug("syncViewer", performance.now() - t);
+  return viewer;
 }
