@@ -11,7 +11,7 @@ import {
   SignUpButton,
 } from "@clerk/tanstack-react-start";
 import { createServerFn } from "@tanstack/react-start";
-import { syncViewer } from "~/auth/clerk";
+import { syncViewer } from "~/lib/auth";
 
 const syncViewerSF = createServerFn().handler(() => syncViewer());
 

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SignOutButton, UserButton } from "@clerk/tanstack-react-start";
 import { createServerFn } from "@tanstack/react-start";
-import { ensureViewerMiddleware } from "~/middleware/auth-middleware";
+import { ensureViewerMiddleware } from "~/lib/auth";
 
 const authorizedSF = createServerFn()
   .middleware([ensureViewerMiddleware])

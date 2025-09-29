@@ -1,14 +1,34 @@
-import { createMiddleware } from "@tanstack/react-start";
+import { getAuth } from "@clerk/tanstack-react-start/server";
 import { getWebRequest } from "@tanstack/react-start/server";
+import { createMiddleware } from "@tanstack/react-start";
 import { sql } from "drizzle-orm";
-import { getClerkUser } from "~/auth/clerk";
 import { db, schema } from "~/postgres/db";
+
+/**
+ * Fetch the clerk user from the Clerk API
+ */
+const getClerkUser = async (request: Request) => {
+  const { sessionClaims, userId, isAuthenticated } = await getAuth(request);
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  if (typeof sessionClaims.email !== "string") {
+    console.warn(
+      "No email found in claims, see https://clerk.com/docs/backend-requests/custom-session-token",
+    );
+
+    return null;
+  }
+
+  return { id: userId, email: sessionClaims.email };
+};
 
 /**
  * Upsert the viewer in the database from the Clerk API
  */
-export async function upsertViewer(clerkUser: { id: string; email: string }) {
-  const t = performance.now();
+async function upsertViewer(clerkUser: { id: string; email: string }) {
   const [viewer] = await db()
     .insert(schema.users)
     .values({
@@ -25,9 +45,27 @@ export async function upsertViewer(clerkUser: { id: string; email: string }) {
     })
     .returning();
 
-  console.debug("upsertViewer", performance.now() - t);
-
   return viewer ?? null;
+}
+
+/**
+ * Sync the Clerk user (email address) with the database and return the viewer,
+ * or null if the user is not signed in.
+ */
+export async function syncViewer() {
+  const t = performance.now();
+
+  const clerkUserId = await getClerkUser(getWebRequest());
+
+  if (!clerkUserId) {
+    return null;
+  }
+
+  // Upsert and return the updated viewer
+  const viewer = await upsertViewer(clerkUserId);
+
+  console.debug("syncViewer", performance.now() - t);
+  return viewer;
 }
 
 /**
@@ -37,6 +75,8 @@ export async function upsertViewer(clerkUser: { id: string; email: string }) {
 export const ensureViewerMiddleware = createMiddleware({
   type: "function",
 }).server(async ({ next }) => {
+  const t = performance.now();
+
   // Get the current clerk user id
   const clerkUser = await getClerkUser(getWebRequest());
 
@@ -44,13 +84,12 @@ export const ensureViewerMiddleware = createMiddleware({
     throw new Error("Unauthorized");
   }
 
-  const t = performance.now();
   const viewer = await upsertViewer(clerkUser);
-  console.debug("upsertViewer", performance.now() - t);
 
   if (!viewer) {
     throw new Error("Unauthorized");
   }
 
+  console.debug("ensureViewerMiddleware", performance.now() - t);
   return next({ context: { viewer } });
 });
