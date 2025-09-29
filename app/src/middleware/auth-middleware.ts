@@ -8,6 +8,7 @@ import { db, schema } from "~/postgres/db";
  * Upsert the viewer in the database from the Clerk API
  */
 export async function upsertViewer(clerkUser: { id: string; email: string }) {
+  const t = performance.now();
   const [viewer] = await db()
     .insert(schema.users)
     .values({
@@ -23,6 +24,8 @@ export async function upsertViewer(clerkUser: { id: string; email: string }) {
       },
     })
     .returning();
+
+  console.debug("upsertViewer", performance.now() - t);
 
   return viewer ?? null;
 }

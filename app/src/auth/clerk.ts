@@ -6,6 +6,7 @@ import { upsertViewer } from "~/middleware/auth-middleware";
  * Fetch the clerk user from the Clerk API
  */
 export const getClerkUser = async (request: Request) => {
+  const t = performance.now();
   const { sessionClaims, userId, isAuthenticated } = await getAuth(request);
 
   if (!isAuthenticated) {
@@ -19,6 +20,8 @@ export const getClerkUser = async (request: Request) => {
 
     return null;
   }
+
+  console.debug("getClerkUser", performance.now() - t);
 
   return { id: userId, email: sessionClaims.email };
 };
