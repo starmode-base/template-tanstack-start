@@ -10,7 +10,6 @@ export const ensureViewerMiddleware = createMiddleware({
 }).server(async ({ next }) => {
   const t = performance.now();
 
-  // Get the current clerk user id
   const viewer = await syncViewer();
 
   if (!viewer) {
