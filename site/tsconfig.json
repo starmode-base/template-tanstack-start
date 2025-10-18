@@ -1,11 +1,5 @@
 {
-  "include": [
-    "src",
-    "scripts",
-    "vite.config.ts",
-    "drizzle.config.ts",
-    "eslint.config.js"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
