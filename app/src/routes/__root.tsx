@@ -11,6 +11,7 @@ import {
   SignUpButton,
 } from "@clerk/tanstack-react-start";
 import { syncViewerSF } from "~/server-functions/sync-viewer";
+import { Splash } from "~/components/splash";
 
 export const Route = createRootRoute({
   beforeLoad: async () => ({
@@ -64,29 +65,12 @@ function Providers(props: React.PropsWithChildren) {
 
 function Shell(props: React.PropsWithChildren) {
   return (
-    <main className="flex h-dvh flex-col">
+    <main className="flex h-dvh flex-col text-slate-900">
       <SignedIn>{props.children}</SignedIn>
       <SignedOut>
         <div className="m-auto flex flex-col rounded bg-white shadow">
-          <div className="flex flex-col gap-2 p-4 text-center">
-            <div className="text-2xl font-semibold text-slate-900">
-              TanStack Start template for apps
-            </div>
-            <div className="text-slate-600">
-              A modern, full-stack React application starter
-            </div>
-            <div className="text-sm text-slate-500">
-              Built with TanStack Router, Clerk Auth, and more
-            </div>
-            <div>
-              <a
-                href="https://github.com/starmode-base/template-tanstack-start"
-                target="_blank"
-                className="text-sky-500 underline hover:text-sky-600"
-              >
-                Get the template →
-              </a>
-            </div>
+          <div className="p-10">
+            <Splash />
           </div>
           <div className="flex gap-2 bg-slate-100 p-4">
             <SignInButton mode="modal">

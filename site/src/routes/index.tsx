@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Splash } from "~/components/splash";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -6,21 +7,8 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="m-auto flex flex-col gap-2 text-center">
-      <div className="text-4xl font-semibold">STΛR MODΞ</div>
-      <div className="text-2xl font-semibold">
-        TanStack Start template for sites
-      </div>
-      <div>A modern, full-stack React application starter</div>
-      <div>
-        <a
-          href="https://github.com/starmode-base/template-tanstack-start"
-          target="_blank"
-          className="text-sky-500 underline hover:text-sky-600"
-        >
-          Get the template →
-        </a>
-      </div>
+    <div className="flex flex-1 items-center justify-center">
+      <Splash />
     </div>
   );
 }

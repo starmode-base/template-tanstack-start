@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SignOutButton, UserButton } from "@clerk/tanstack-react-start";
 import { createServerFn } from "@tanstack/react-start";
 import { ensureViewerMiddleware } from "~/lib/auth-middleware";
+import { Splash } from "~/components/splash";
 
 const authorizedSF = createServerFn()
   .middleware([ensureViewerMiddleware])
@@ -36,27 +37,8 @@ function Home() {
           </SignOutButton>
         </div>
       </div>
-      <div className="flex flex-1">
-        <div className="m-auto flex flex-col gap-2 pb-10 text-center">
-          <div className="text-2xl font-semibold text-slate-900">
-            TanStack Start template for apps
-          </div>
-          <div className="text-slate-600">
-            A modern, full-stack React application starter
-          </div>
-          <div className="text-sm text-slate-500">
-            Built with TanStack Router, Clerk Auth, and more
-          </div>
-          <div>
-            <a
-              href="https://github.com/starmode-base/template-tanstack-start"
-              target="_blank"
-              className="text-sky-500 underline hover:text-sky-600"
-            >
-              Get the template →
-            </a>
-          </div>
-        </div>
+      <div className="flex flex-1 items-center justify-center">
+        <Splash />
       </div>
     </>
   );
