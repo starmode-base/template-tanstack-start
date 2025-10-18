@@ -10,10 +10,7 @@ import {
   SignInButton,
   SignUpButton,
 } from "@clerk/tanstack-react-start";
-import { createServerFn } from "@tanstack/react-start";
-import { syncViewer } from "~/lib/auth";
-
-const syncViewerSF = createServerFn().handler(() => syncViewer());
+import { syncViewerSF } from "~/server-functions/sync-viewer";
 
 export const Route = createRootRoute({
   beforeLoad: async () => ({
