@@ -4,7 +4,6 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import metadata from "./metadata.json";
-import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 
 export default defineConfig({
   server: {
@@ -13,7 +12,6 @@ export default defineConfig({
   plugins: [
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart(),
-    nitroV2Plugin(),
     viteReact(),
     tailwindcss(),
   ],
