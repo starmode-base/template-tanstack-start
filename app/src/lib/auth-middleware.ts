@@ -11,7 +11,7 @@ import {
 
 /**
  * Middleware to ensure the viewer is signed in and has a viewer record in the
- * database.
+ * database
  */
 export const ensureViewerMiddleware = createMiddleware({
   type: "function",
