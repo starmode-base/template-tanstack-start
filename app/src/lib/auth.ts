@@ -1,4 +1,5 @@
 import { auth } from "@clerk/tanstack-react-start/server";
+import { notFound } from "@tanstack/react-router";
 import { eq, sql } from "drizzle-orm";
 import { db, schema } from "~/postgres/db";
 import { memoizeAsync } from "./memoize";
@@ -177,4 +178,55 @@ export function clearViewerCache(userId: string) {
 export function clearAllViewerCaches() {
   getViewerMemoized.clear();
   upsertViewerMemoized.clear();
+}
+
+/**
+ * Check if viewer has any role in the workspace (or is a superuser)
+ */
+export function hasAnyRole(viewer: Viewer, workspaceId: string): boolean {
+  return viewer.isSuperuser || viewer.workspaceIds.includes(workspaceId);
+}
+
+/**
+ * Check if viewer has the member role in the workspace (or is a superuser)
+ */
+export function hasMemberRole(viewer: Viewer, workspaceId: string): boolean {
+  return viewer.isSuperuser || viewer.memberWorkspaceIds.includes(workspaceId);
+}
+
+/**
+ * Check if viewer has the admin role in the workspace (or is a superuser)
+ */
+export function hasAdminRole(viewer: Viewer, workspaceId: string): boolean {
+  return viewer.isSuperuser || viewer.adminWorkspaceIds.includes(workspaceId);
+}
+
+/**
+ * Ensure viewer has any role in the workspace (or is a superuser), throw
+ * notFound if not
+ */
+export function ensureAnyRole(viewer: Viewer, workspaceId: string): void {
+  if (!hasAnyRole(viewer, workspaceId)) {
+    throw notFound();
+  }
+}
+
+/**
+ * Ensure viewer has the member role in the workspace (or is a superuser), throw
+ * notFound if not
+ */
+export function ensureMemberRole(viewer: Viewer, workspaceId: string): void {
+  if (!hasMemberRole(viewer, workspaceId)) {
+    throw notFound();
+  }
+}
+
+/**
+ * Ensure viewer has the admin role in the workspace (or is a superuser), throw
+ * notFound if not
+ */
+export function ensureAdminRole(viewer: Viewer, workspaceId: string): void {
+  if (!hasAdminRole(viewer, workspaceId)) {
+    throw notFound();
+  }
 }
