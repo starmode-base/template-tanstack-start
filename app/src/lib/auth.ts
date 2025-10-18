@@ -2,6 +2,7 @@ import { auth } from "@clerk/tanstack-react-start/server";
 import { eq, sql } from "drizzle-orm";
 import { db, schema } from "~/postgres/db";
 import { memoizeAsync } from "./memoize";
+import type { WorkspaceMemberRole } from "~/postgres/schema";
 
 /**
  * Viewer type
@@ -11,13 +12,16 @@ export interface Viewer {
   email: string;
   workspaceMemberships: {
     workspaceId: string;
-    role: "administrator" | "member";
+    role: WorkspaceMemberRole;
   }[];
-  workspaceMembershipIds: string[];
+  workspaceIds: string[];
+  memberWorkspaceIds: string[];
+  adminWorkspaceIds: string[];
+  isSuperuser: boolean;
 }
 
 /**
- * Fetch the clerk user from the Clerk API
+ * Fetch the currently authenticated Clerk user from the Clerk API
  */
 const getClerkUser = async () => {
   const { sessionClaims, userId, isAuthenticated } = await auth();
@@ -46,7 +50,8 @@ const getClerkUser = async () => {
 };
 
 /**
- * Get the viewer (the current user) with memberships
+ * Get the viewer (the currently authenticated user) with their workspace
+ * memberships
  */
 async function getViewer(userId: string): Promise<Viewer | null> {
   const userWithMemberships = await db().query.users.findFirst({
@@ -54,6 +59,7 @@ async function getViewer(userId: string): Promise<Viewer | null> {
     columns: {
       id: true,
       email: true,
+      isSuperuser: true,
     },
     with: {
       workspaceMemberships: {
@@ -73,9 +79,16 @@ async function getViewer(userId: string): Promise<Viewer | null> {
     id: userWithMemberships.id,
     email: userWithMemberships.email,
     workspaceMemberships: userWithMemberships.workspaceMemberships,
-    workspaceMembershipIds: userWithMemberships.workspaceMemberships.map(
+    workspaceIds: userWithMemberships.workspaceMemberships.map(
       (membership) => membership.workspaceId,
     ),
+    memberWorkspaceIds: userWithMemberships.workspaceMemberships
+      .filter((member) => member.role === "member")
+      .map((member) => member.workspaceId),
+    adminWorkspaceIds: userWithMemberships.workspaceMemberships
+      .filter((member) => member.role === "administrator")
+      .map((member) => member.workspaceId),
+    isSuperuser: userWithMemberships.isSuperuser,
   };
 
   return viewer;
