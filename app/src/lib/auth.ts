@@ -28,7 +28,15 @@ const getClerkUser = async () => {
 
   if (typeof sessionClaims.email !== "string") {
     console.warn(
-      "No email found in claims, see https://clerk.com/docs/backend-requests/custom-session-token",
+      [
+        "No email found in claims, see https://clerk.com/docs/guides/sessions/customize-session-tokens",
+        "",
+        "Customize the Clerksession token claims to include the email address:",
+        "",
+        "```json",
+        JSON.stringify({ email: "{{user.primary_email_address}}" }, null, 2),
+        "```",
+      ].join("\n"),
     );
 
     return null;
