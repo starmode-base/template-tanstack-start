@@ -9,10 +9,5 @@ export default defineConfig({
   server: {
     port: metadata.dev.port,
   },
-  plugins: [
-    tsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tanstackStart(),
-    viteReact(),
-    tailwindcss(),
-  ],
+  plugins: [tsConfigPaths(), tanstackStart(), viteReact(), tailwindcss()],
 });
