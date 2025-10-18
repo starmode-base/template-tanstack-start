@@ -11,8 +11,8 @@ export default defineConfig({
     port: metadata.dev.port,
   },
   plugins: [
-    tsConfigPaths({ projects: ["./tsconfig.json"] }),
-    tanstackStart({ customViteReactPlugin: true }),
+    tsConfigPaths(),
+    tanstackStart(),
     viteReact(),
     tailwindcss(),
     neonTesting(),

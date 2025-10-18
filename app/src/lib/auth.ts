@@ -1,5 +1,4 @@
-import { getAuth } from "@clerk/tanstack-react-start/server";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { auth } from "@clerk/tanstack-react-start/server";
 import { sql } from "drizzle-orm";
 import { db, schema } from "~/postgres/db";
 import { memoizeAsync } from "./memoize";
@@ -7,8 +6,8 @@ import { memoizeAsync } from "./memoize";
 /**
  * Fetch the clerk user from the Clerk API
  */
-const getClerkUser = async (request: Request) => {
-  const { sessionClaims, userId, isAuthenticated } = await getAuth(request);
+const getClerkUser = async () => {
+  const { sessionClaims, userId, isAuthenticated } = await auth();
 
   if (!isAuthenticated) {
     return null;
@@ -61,7 +60,7 @@ const upsertViewerMemoized = memoizeAsync(
 export async function syncViewer() {
   const t = performance.now();
 
-  const clerkUser = await getClerkUser(getWebRequest());
+  const clerkUser = await getClerkUser();
 
   if (!clerkUser) {
     return null;
