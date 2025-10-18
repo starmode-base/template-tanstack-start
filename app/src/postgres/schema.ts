@@ -1,5 +1,7 @@
 /**
- * Postgres schema
+ * Postgres Drizzle ORM schema
+ *
+ * Instructions: .cursor/rules/drizzle.mdc
  *
  * NOTE: It is important to make shared field helpers function as they are
  * mutated by the ORM (particularly the inferred field name).
@@ -67,7 +69,14 @@ export type WorkspaceMemberRole =
  */
 export const users = pgTable("users", {
   ...baseSchema,
+  /**
+   * User email address copied from Clerk's primary email
+   *
+   * Intentionally not unique in this table because Clerk enforces uniqueness
+   * and emails can change. Cached here for display and convenience.
+   */
   email: text().notNull(),
+  /** Stable unique user identifier from Clerk */
   clerkUserId: text().notNull().unique(),
   isSuperuser: boolean().notNull().default(false),
 });
@@ -88,6 +97,8 @@ export type WorkspaceInsert = typeof workspaces.$inferInsert;
 
 /**
  * Workspace memberships junction table
+ *
+ * Enables many-to-many relationships between workspaces and users
  */
 export const workspaceMemberships = pgTable(
   "workspace_memberships",

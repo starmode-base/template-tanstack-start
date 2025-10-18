@@ -14,6 +14,8 @@ import { syncViewerSF } from "~/server-functions/sync-viewer";
 
 export const Route = createRootRoute({
   beforeLoad: async () => ({
+    // Ensure the viewer is synced from Clerk to the database. This also makes
+    // the viewer available as context in the loader of descendant routes.
     viewer: await syncViewerSF(),
   }),
   head: () => ({
