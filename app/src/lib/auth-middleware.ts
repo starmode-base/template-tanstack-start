@@ -8,14 +8,11 @@ import { syncViewer } from "./auth";
 export const ensureViewerMiddleware = createMiddleware({
   type: "function",
 }).server(async ({ next }) => {
-  const t = performance.now();
-
   const viewer = await syncViewer();
 
   if (!viewer) {
     throw new Error("Unauthorized");
   }
 
-  console.debug("ensureViewerMiddleware", performance.now() - t);
   return next({ context: { viewer } });
 });
