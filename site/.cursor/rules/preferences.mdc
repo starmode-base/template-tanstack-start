@@ -39,7 +39,7 @@ CRITICALLY IMPORTANT: Write tests based on expected behavior/requirements, NOT t
 - It's okay to disable lint rules in test files if needed.
 - Use `describe.each` or `test.each` when validating the same logic across multiple inputs.
 - Prefer `{ label, input, expected }` objects for parameterized test cases.
-- Use names (characters, planets, space stations, spaceships) from Aliens (1986) and Alien (1979).
+- Use names (characters, planets, space stations, spaceships) from the Aliens (1986) movie.
 
 # Documentation
 
