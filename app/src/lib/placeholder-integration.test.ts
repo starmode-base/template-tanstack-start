@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { Pool } from "@neondatabase/serverless";
 import { db, schema } from "~/postgres/db";
-import { withNeonTestBranch } from "./neon-testing";
+import { withNeonTestBranch } from "~/testing/neon-testing";
 
 /**
  * Enable Neon Postgres integration tests
