@@ -50,5 +50,7 @@ function Providers(props: React.PropsWithChildren) {
 }
 
 function Shell(props: React.PropsWithChildren) {
-  return <>{props.children}</>;
+  return (
+    <main className="flex h-dvh flex-col text-slate-900">{props.children}</main>
+  );
 }

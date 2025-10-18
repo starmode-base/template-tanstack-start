@@ -1,49 +1,26 @@
-import * as fs from "node:fs";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-
-const filePath = "/tmp/count.txt";
-
-async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
-  );
-}
-
-const getCount = createServerFn({
-  method: "GET",
-}).handler(() => {
-  return readCount();
-});
-
-const updateCount = createServerFn({ method: "POST" })
-  .inputValidator((d: number) => d)
-  .handler(async ({ data }) => {
-    const count = await readCount();
-    await fs.promises.writeFile(filePath, `${count + data}`);
-  });
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Home,
-  loader: async () => await getCount(),
 });
 
 function Home() {
-  const router = useRouter();
-  const state = Route.useLoaderData();
-
   return (
-    <main className="flex h-dvh flex-col">
-      <button
-        type="button"
-        onClick={() => {
-          void updateCount({ data: 1 }).then(() => {
-            void router.invalidate();
-          });
-        }}
-      >
-        Add 1 to {state}?
-      </button>
-    </main>
+    <div className="m-auto flex flex-col gap-2 text-center">
+      <div className="text-4xl font-semibold">STΛR MODΞ</div>
+      <div className="text-2xl font-semibold">
+        TanStack Start template for sites
+      </div>
+      <div>A modern, full-stack React application starter</div>
+      <div>
+        <a
+          href="https://github.com/starmode-base/template-tanstack-start"
+          target="_blank"
+          className="text-sky-500 underline hover:text-sky-600"
+        >
+          Get the template →
+        </a>
+      </div>
+    </div>
   );
 }
