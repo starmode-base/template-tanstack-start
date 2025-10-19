@@ -67,14 +67,12 @@ export default defineConfig([
         tsconfigRootDir: import.meta.dirname,
       },
     },
-  },
 
-  /**
-   * TypeScript - Custom rule overrides
-   *
-   * https://typescript-eslint.io/rules/
-   */
-  {
+    /**
+     * TypeScript - Custom rule overrides
+     *
+     * https://typescript-eslint.io/rules/
+     */
     rules: {
       /** https://typescript-eslint.io/rules/no-misused-promises/ */
       "@typescript-eslint/no-misused-promises": [
