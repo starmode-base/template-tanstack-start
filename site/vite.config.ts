@@ -4,10 +4,18 @@ import tsConfigPaths from "vite-tsconfig-paths";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import metadata from "./metadata.json";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 
 export default defineConfig({
   server: {
     port: metadata.dev.port,
   },
-  plugins: [tsConfigPaths(), tanstackStart(), viteReact(), tailwindcss()],
+  plugins: [
+    tsConfigPaths(),
+    tanstackStart(),
+    // https://tanstack.com/start/latest/docs/framework/react/guide/hosting#nitro
+    nitroV2Plugin(),
+    viteReact(),
+    tailwindcss(),
+  ],
 });

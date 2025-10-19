@@ -5,6 +5,7 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import metadata from "./metadata.json";
 import { neonTesting } from "neon-testing/vite";
+import { nitroV2Plugin } from "@tanstack/nitro-v2-vite-plugin";
 
 export default defineConfig({
   server: {
@@ -13,8 +14,14 @@ export default defineConfig({
   plugins: [
     tsConfigPaths(),
     tanstackStart(),
+    // https://tanstack.com/start/latest/docs/framework/react/guide/hosting#nitro
+    nitroV2Plugin(),
     viteReact(),
     tailwindcss(),
     neonTesting(),
   ],
+  test: {
+    setupFiles: ["vitest.clerk.setup.ts"],
+    testTimeout: 10000,
+  },
 });
