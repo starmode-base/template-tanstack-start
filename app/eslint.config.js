@@ -18,7 +18,7 @@ export default defineConfig([
    * Ignore files
    */
   {
-    ignores: [".nitro/*", ".output/*", ".tanstack/*", "**/*.js"],
+    ignores: [".nitro/*", ".output/*", ".tanstack/*", "**/*.{js,mjs,cjs,jsx}"],
   },
 
   /**
@@ -28,7 +28,7 @@ export default defineConfig([
    * https://eslint.org/blog/2025/03/flat-config-extends-define-config-global-ignores/
    */
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    files: ["**/*.{ts,tsx}"],
     plugins: { js: eslint },
     extends: ["js/recommended"],
     languageOptions: {
