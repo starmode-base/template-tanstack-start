@@ -11,7 +11,7 @@
     "build": "prettier --check . && eslint --max-warnings 0 && vite build && tsc --noEmit && vitest run",
     "start": "PORT=$(scripts/start.ts) node -r dotenv/config .output/server/index.mjs",
     "format": "prettier --write .",
-    "lint": "eslint --max-warnings 0 --fix",
+    "lint": "eslint --fix",
     "test": "vitest",
     "env:pull": "bunx vercel@latest env pull .env",
     "clean:soft": "rm -rf node_modules tsconfig.tsbuildinfo .nitro .output .tanstack dist && bun install",
