@@ -4,7 +4,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { ensureViewerMiddleware } from "~/lib/auth-middleware";
 import { Splash } from "~/components/splash";
 
-const authorizedSF = createServerFn()
+const authorizedSF = createServerFn({ method: "POST" })
   .middleware([ensureViewerMiddleware])
   .handler(() => {
     return "ok";

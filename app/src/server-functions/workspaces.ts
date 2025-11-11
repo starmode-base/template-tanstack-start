@@ -12,7 +12,7 @@ import { db, schema } from "~/postgres/db";
  * Any authenticated user can create a workspace, becomes an _administrator_ of
  * the created workspace
  */
-export const createWorkspaceSF = createServerFn()
+export const createWorkspaceSF = createServerFn({ method: "POST" })
   .middleware([ensureViewerMiddleware])
   .inputValidator(z.object({ name: OrganizationName }))
   .handler(async ({ data: input, context }) => {
@@ -39,7 +39,7 @@ export const createWorkspaceSF = createServerFn()
  *
  * Viewer must be an _administrator_ of the workspace or a _superuser_
  */
-export const updateWorkspaceSF = createServerFn()
+export const updateWorkspaceSF = createServerFn({ method: "POST" })
   .middleware([ensureViewerMiddleware])
   .inputValidator(z.object({ id: SecureToken, name: OrganizationName }))
   .handler(async ({ data: input, context }) => {
@@ -63,7 +63,7 @@ export const updateWorkspaceSF = createServerFn()
  *
  * Viewer must be an _administrator_ of the workspace or a _superuser_
  */
-export const deleteWorkspaceSF = createServerFn()
+export const deleteWorkspaceSF = createServerFn({ method: "POST" })
   .middleware([ensureViewerMiddleware])
   .inputValidator(z.object({ id: SecureToken }))
   .handler(async ({ data: input, context }) => {
@@ -85,7 +85,7 @@ export const deleteWorkspaceSF = createServerFn()
  * Returns the workspace for the given ID if the viewer has _any_ role in the
  * workspace or is a _superuser_
  */
-export const getWorkspaceSF = createServerFn()
+export const getWorkspaceSF = createServerFn({ method: "GET" })
   .middleware([ensureViewerMiddleware])
   .inputValidator(z.object({ id: SecureToken }))
   .handler(async ({ data: input, context }) => {
@@ -107,7 +107,7 @@ export const getWorkspaceSF = createServerFn()
  * Returns the list of workspaces where the viewer has _any_ role, or all
  * workspaces if the viewer is a _superuser_
  */
-export const listWorkspacesSF = createServerFn()
+export const listWorkspacesSF = createServerFn({ method: "GET" })
   .middleware([ensureViewerMiddleware])
   .handler(async ({ context }) => {
     const workspaces = await db().query.workspaces.findMany({
