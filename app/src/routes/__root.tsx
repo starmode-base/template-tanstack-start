@@ -13,6 +13,9 @@ import {
 import { syncViewerSF } from "~/server-functions/sync-viewer";
 import { Splash } from "~/components/splash";
 
+/**
+ * Route
+ */
 export const Route = createRootRoute({
   beforeLoad: async () => ({
     // Ensure the viewer is synced from Clerk to the database. This also makes
@@ -37,6 +40,9 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 });
 
+/**
+ * Root document
+ */
 function RootDocument(props: React.PropsWithChildren) {
   // https://vercel.com/docs/analytics/quickstart
   inject();
@@ -59,10 +65,16 @@ function RootDocument(props: React.PropsWithChildren) {
   );
 }
 
+/**
+ * Providers
+ */
 function Providers(props: React.PropsWithChildren) {
   return <ClerkProvider>{props.children}</ClerkProvider>;
 }
 
+/**
+ * Shell
+ */
 function Shell(props: React.PropsWithChildren) {
   return (
     <main className="flex h-dvh flex-col text-slate-900">

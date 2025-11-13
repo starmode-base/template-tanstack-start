@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "prettier --check . && eslint --max-warnings 0 && vite build && tsc --noEmit && drizzle-kit migrate && vitest run",
-    "start": "PORT=$(scripts/start.ts) node -r dotenv/config .output/server/index.mjs",
+    "start": "PORT=$(scripts/port.ts) node -r dotenv/config .output/server/index.mjs",
     "format": "prettier --write .",
     "lint": "eslint --fix",
     "test": "vitest",

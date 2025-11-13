@@ -23,6 +23,9 @@ export const Route = createRootRoute({
   shellComponent: RootDocument,
 });
 
+/**
+ * Root document
+ */
 function RootDocument(props: React.PropsWithChildren) {
   // https://vercel.com/docs/analytics/quickstart
   inject();
@@ -45,10 +48,16 @@ function RootDocument(props: React.PropsWithChildren) {
   );
 }
 
+/**
+ * Providers
+ */
 function Providers(props: React.PropsWithChildren) {
   return <>{props.children}</>;
 }
 
+/**
+ * Shell
+ */
 function Shell(props: React.PropsWithChildren) {
   return (
     <main className="flex h-dvh flex-col text-slate-900">{props.children}</main>
