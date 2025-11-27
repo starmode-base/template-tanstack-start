@@ -119,3 +119,4 @@ export const ensureEnv = createEnsureEnv({
 export const isProduction = () => ensureEnv("VERCEL_ENV") === "production";
 export const isPreview = () => ensureEnv("VERCEL_ENV") === "preview";
 export const isDevelopment = () => ensureEnv("VERCEL_ENV") === "development";
+export const isTest = () => process.env.NODE_ENV === "test";
