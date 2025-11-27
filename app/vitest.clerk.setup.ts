@@ -43,7 +43,7 @@ function createAuthState(
 const mockGetAuth = vi.fn();
 
 vi.mock("@clerk/tanstack-react-start/server", () => ({
-  getAuth: mockGetAuth,
+  auth: mockGetAuth,
 }));
 
 vi.mock("@tanstack/react-start/server", () => ({
@@ -77,7 +77,7 @@ export const mockAuth = {
  * Reset auth to require explicit setup before each test
  *
  * Tests MUST explicitly set their authentication state:
- * - mockAuth.authenticated("ripley", "ripley@nostromo.space")
+ * - mockAuth.authenticated("ripley", "ripley@example.com")
  * - mockAuth.unauthenticated()
  *
  * Forgetting to set auth will cause a clear error message.

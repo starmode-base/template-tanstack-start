@@ -5,6 +5,29 @@ import { clearViewerCache, syncViewer } from "~/lib/auth";
 import { mockAuth } from "vitest.clerk.setup";
 
 /**
+ * Creates a barrier that blocks until `count` callers have arrived, then
+ * releases all of them simultaneously
+ */
+export function createBarrier(count: number) {
+  let arrived = 0;
+  let release: () => void;
+
+  const barrier = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+
+  return async () => {
+    arrived++;
+
+    if (arrived === count) {
+      release();
+    }
+
+    await barrier;
+  };
+}
+
+/**
  * Test actors for switching between different authentication states
  */
 export const act = {
@@ -15,7 +38,7 @@ export const act = {
    * Safe to call multiple times.
    */
   asUser: async (clerkUserId: string) => {
-    mockAuth.authenticated(clerkUserId, `${clerkUserId}@nostromo.space`);
+    mockAuth.authenticated(clerkUserId, `${clerkUserId}@example.com`);
     const viewer = await syncViewer();
     invariant(viewer);
 
@@ -46,7 +69,7 @@ export const act = {
    * Safe to call multiple times.
    */
   asSuperuser: async (clerkUserId: string) => {
-    mockAuth.authenticated(clerkUserId, `${clerkUserId}@nostromo.space`);
+    mockAuth.authenticated(clerkUserId, `${clerkUserId}@example.com`);
     const viewer = await syncViewer();
     invariant(viewer);
 
