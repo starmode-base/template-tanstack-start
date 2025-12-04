@@ -1,4 +1,4 @@
-![STAR MODE - We help companies build better AI](site/public/open-graph.png)
+![STAR MODE - We help companies build better AI](public/open-graph.png)
 
 <h1 align="center">TanStack Start templates</h1>
 
