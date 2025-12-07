@@ -8,6 +8,7 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "npm.packageManager": "bun",
+  "npm.scriptRunner": "bun",
   "files.watcherExclude": {
     "**/routeTree.gen.ts": true
   },
