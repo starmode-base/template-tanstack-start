@@ -2,7 +2,6 @@
   "exclude": ["node_modules", "dist", ".nitro", ".output", ".tanstack"],
   "compilerOptions": {
     "strict": true,
-    "esModuleInterop": true,
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
@@ -19,6 +18,7 @@
     "noEmit": true,
     "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true,
+    "noUncheckedSideEffectImports": true,
     "types": ["vite/client"]
   }
 }
