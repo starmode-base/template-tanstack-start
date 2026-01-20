@@ -52,7 +52,7 @@ IMPORTANT: Use the [Neon-Managed Integration](https://neon.com/docs/guides/neon-
 
 ### Prerequisites
 
-1. Install [Node.js](https://nodejs.org/) (v22.x)
+1. Install [Node.js](https://nodejs.org/) (v24.x) using [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md)
 1. Install [Bun](https://bun.sh/)
 1. Clone the [git repo](https://github.com/starmode-base/new-dawn)
 1. Install dependencies: `bun install`
