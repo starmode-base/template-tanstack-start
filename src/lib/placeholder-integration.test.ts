@@ -1,12 +1,12 @@
 import { expect, test } from "vitest";
 import { Pool } from "@neondatabase/serverless";
 import { db, schema } from "~/postgres/db";
-import { withNeonTestBranch } from "~/testing/neon-testing";
+import { neonTesting } from "~/testing/neon-testing";
 
 /**
  * Enable Neon Postgres integration tests
  */
-withNeonTestBranch();
+neonTesting();
 
 test("Neon WebSocket database operations", async () => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
