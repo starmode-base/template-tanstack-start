@@ -10,5 +10,6 @@
     "stkb.rewrap",
     "vitest.explorer",
     "wmaurer.change-case"
-  ]
+  ],
+  "unwantedRecommendations": ["ms-azuretools.vscode-containers"]
 }
